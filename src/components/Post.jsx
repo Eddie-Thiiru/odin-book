@@ -1,3 +1,22 @@
+const Comment = () => {
+  return (
+    <div className="createComment">
+      <img src="" alt="" />
+      <form className="commentForm">
+        <label>
+          <input
+            type="textarea"
+            className="commentInput"
+            name="text"
+            placeholder="Write a comment"
+          />
+        </label>
+        <button type="submit">Add comment</button>
+      </form>
+    </div>
+  );
+};
+
 const Post = () => {
   return (
     <div className="post">
@@ -31,6 +50,10 @@ const Post = () => {
           </button>
         </div>
       </footer>
+      {/* 
+        When comment button clicked show comment form
+        <Comment />
+      */}
     </div>
   );
 };
