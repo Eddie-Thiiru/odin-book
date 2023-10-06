@@ -26,10 +26,16 @@ const Login = () => {
               />
             </label>
           </div>
-          <button className="loginBtn">Log in</button>
-          <button className="loginFacebookBtn">Log in with Facebook</button>
+          <button type="submit" className="loginBtn">
+            Log in
+          </button>
+          <button type="button" className="loginFacebookBtn">
+            Log in with Facebook
+          </button>
         </form>
-        <button className="loginCreateAccBtn">Create New Account</button>
+        <button type="button" className="loginCreateAccBtn">
+          Create New Account
+        </button>
       </div>
     </div>
   );
