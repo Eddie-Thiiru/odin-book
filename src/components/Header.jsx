@@ -5,9 +5,8 @@ const Header = () => {
     <header className="appHeader">
       <h2>Odinbook</h2>
       <nav className="headerNav">
-        <Link to={"home"} />
-        <Link to={"post"}>Post</Link>
-        <Link to={"profile"}>
+        <Link to={"/"}>Home</Link>
+        <Link to={"/profile"}>
           <img src="" alt="account" />
         </Link>
       </nav>

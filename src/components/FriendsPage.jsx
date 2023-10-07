@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Requests = () => {
   return (
@@ -59,18 +59,30 @@ const List = () => {
 const FriendsPage = () => {
   const { name } = useParams();
 
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(`/${path}`);
+  };
+
   return (
     <div className="friendsPage">
       <div className="friendsSidebar">
-        <div className="sidebarGrp">
+        <div className="sidebarGrp" onClick={() => handleNavigation("friends")}>
           <img src="" alt="" />
           <p>Home</p>
         </div>
-        <div className="sidebarGrp">
+        <div
+          className="sidebarGrp"
+          onClick={() => handleNavigation("friends/requests")}
+        >
           <img src="" alt="" />
           <p>Friend Requests</p>
         </div>
-        <div className="sidebarGrp">
+        <div
+          className="sidebarGrp"
+          onClick={() => handleNavigation("friends/suggestions")}
+        >
           <img src="" alt="" />
           <p>Suggestions</p>
         </div>
