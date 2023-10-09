@@ -1,0 +1,35 @@
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postHeader {
+  display: flex;
+}
+
+.postContent {
+  min-height: 50px;
+}
+
+.postFooter {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.postFooter > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postMenuBtn {
+  margin-left: auto;
+}

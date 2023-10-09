@@ -1,0 +1,30 @@
+.homepage {
+  display: grid;
+  grid-template-columns: minmax(250px, 400px) 2fr minmax(250px, 400px);
+}
+
+.homepageMain {
+  width: 680px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.homepageHeader {
+  height: 70px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.homeCreateBtn {
+  height: 40px;
+  background-color: gray;
+  flex: 1;
+}
+
+.sidebarGrp img,
+.sidebarGrp p {
+  pointer-events: none;
+}

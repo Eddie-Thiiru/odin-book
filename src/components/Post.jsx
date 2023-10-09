@@ -1,3 +1,5 @@
+import "../stylesheets/post.css";
+
 const Comment = () => {
   return (
     <div className="createComment">

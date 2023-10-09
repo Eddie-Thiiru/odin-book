@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Post from "./Post";
 
+import "../stylesheets/homepage.css";
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -20,14 +22,16 @@ const Home = () => {
           <p>Friends</p>
         </div>
       </div>
-      <div className="homepageHeader">
-        <img src="" alt="" />
-        <button type="button" className="homeCreateBtn">
-          `What&apos;s on your mind?`
-        </button>
-      </div>
-      <div className="postsContainer">
-        <Post />
+      <div className="homepageMain">
+        <div className="homepageHeader">
+          <img src="" alt="" />
+          <button type="button" className="homeCreateBtn">
+            `What&apos;s on your mind?`
+          </button>
+        </div>
+        <div className="postsContainer">
+          <Post />
+        </div>
       </div>
     </div>
   );

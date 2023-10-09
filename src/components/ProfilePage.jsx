@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import Post from "./Post";
 
+import("../stylesheets/profilePage.css");
+
 const ProfileHome = () => {
   return (
     <section className="profileHome">
@@ -28,7 +30,9 @@ const ProfileHome = () => {
             `What&apos;s on your mind?`
           </button>
         </div>
-        <div>
+        <div className="postsContainer">
+          <Post />
+          <Post />
           <Post />
         </div>
       </div>
@@ -38,7 +42,7 @@ const ProfileHome = () => {
 
 const About = () => {
   return (
-    <section className="about">
+    <section className="profileAbout">
       <p>My name is? </p>
     </section>
   );
@@ -46,9 +50,58 @@ const About = () => {
 
 const Friends = () => {
   return (
-    <section className="friendsList">
+    <section className="profileFriends">
       <h3>All friends</h3>
       <div className="friendsContainer">
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
+        <div className="friend">
+          <img src="" alt="" />
+          <p>example suggest</p>
+          <button type="button" className="removeFriendBtn">
+            Unfriend
+          </button>
+        </div>
         <div className="friend">
           <img src="" alt="" />
           <p>example suggest</p>

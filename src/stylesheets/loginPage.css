@@ -1,0 +1,33 @@
+.loginPage {
+  padding: 50px;
+  gap: 20px;
+}
+
+.loginPage,
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loginForm {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loginFormGrp {
+  padding: 10px 20px;
+  display: flex;
+}
+
+.loginFormGrp label,
+.loginFormGrp input {
+  width: 100%;
+}
+
+.loginForm button {
+  margin: 0px 20px;
+}

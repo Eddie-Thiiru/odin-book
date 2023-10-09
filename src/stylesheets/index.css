@@ -12,6 +12,12 @@ body {
   justify-content: center;
 }
 
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -19,7 +25,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   color: #ffffff;
-  background-color: #1a1a1a;
+  background-color: #1877f2;
   padding: 0.6em 1.2em;
   cursor: pointer;
 }

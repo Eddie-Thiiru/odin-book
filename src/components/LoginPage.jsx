@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
+import "../stylesheets/loginPage.css";
+
 const Login = () => {
   return (
     <div className="loginPage">
-      <h2>odinbook</h2>
+      <h1>odinbook</h1>
       <div className="loginWrapper">
         <form className="loginForm">
           <div className="loginFormGrp">
@@ -33,9 +37,7 @@ const Login = () => {
             Log in with Facebook
           </button>
         </form>
-        <button type="button" className="loginCreateAccBtn">
-          Create New Account
-        </button>
+        <Link to={"/signup"}>Create New Account</Link>
       </div>
     </div>
   );

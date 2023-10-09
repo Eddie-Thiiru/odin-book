@@ -1,8 +1,11 @@
+import "../stylesheets/signUpPage.css";
+
 const SignUp = () => {
   return (
     <div className="signUpPage">
-      <h2>odinbook</h2>
+      <h1>odinbook</h1>
       <div className="signUpWrapper">
+        <h2>Create a new account</h2>
         <form className="signUpForm">
           <div className="signUpFormGrp">
             <label>
@@ -24,7 +27,7 @@ const SignUp = () => {
               />
             </label>
           </div>
-          <div className="SignUpFormGrp">
+          <div className="signUpFormGrp">
             <label>
               <input
                 id="emailInput"
@@ -35,7 +38,7 @@ const SignUp = () => {
               />
             </label>
           </div>
-          <div className="SignUpFormGrp">
+          <div className="signUpFormGrp">
             <label>
               <input
                 id="passwordInput"
@@ -49,7 +52,7 @@ const SignUp = () => {
           <button type="submit" className="signUpBtn">
             Sign Up
           </button>
-          <a href="">Already have an account?</a>
+          <a href="/login">Already have an account?</a>
         </form>
       </div>
     </div>

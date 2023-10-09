@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 
+import "../stylesheets/friendsPage.css";
+
 const Requests = () => {
   return (
     <section className="requestsSection">
@@ -30,9 +32,11 @@ const Suggestions = () => {
         <div className="userRequest">
           <img src="" alt="" />
           <p>example suggest</p>
-          <button type="button" className="addFriendBtn">
-            Add friend
-          </button>
+          <div>
+            <button type="button" className="addFriendBtn">
+              Add friend
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -87,7 +91,7 @@ const FriendsPage = () => {
           <p>Suggestions</p>
         </div>
       </div>
-      <div className="main">
+      <div className="friendsPageMain">
         {name === "requests" ? (
           <Requests />
         ) : name === "suggestions" ? (
