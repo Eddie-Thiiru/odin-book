@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { PostContext } from "../App";
 import Post from "./Post";
 
 import "../stylesheets/homepage.css";
 
 const Home = () => {
+  const { openNewPostModal } = useContext(PostContext);
+
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
@@ -25,7 +29,11 @@ const Home = () => {
       <div className="homepageMain">
         <div className="homepageHeader">
           <img src="" alt="" />
-          <button type="button" className="homeCreateBtn">
+          <button
+            type="button"
+            className="homeCreateBtn"
+            onClick={openNewPostModal}
+          >
             `What&apos;s on your mind?`
           </button>
         </div>

@@ -33,6 +33,10 @@ input {
   height: 50px;
 }
 
+textarea {
+  padding: 5px;
+}
+
 button {
   height: 45px;
 }

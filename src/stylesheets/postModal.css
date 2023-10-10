@@ -1,0 +1,45 @@
+.postModalHeaderOne,
+.postModalHeaderTwo {
+  padding: 10px 0px;
+  display: flex;
+}
+
+.postModalForm {
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postModalFormGrp,
+.postModalFormGrp label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.postModalFormGrp label,
+.postModalFormGrp textarea {
+  width: 100%;
+}
+
+.postModalFormGrp input {
+  height: max-content;
+}
+
+.postModalFormGrp textarea {
+  resize: none;
+}
+
+.closePostModalBtn {
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+  margin-left: auto;
+}
+
+.addPostBtn {
+  height: 35px;
+  padding: 5px;
+  margin-top: 10px;
+}
