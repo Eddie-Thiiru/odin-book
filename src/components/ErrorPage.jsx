@@ -1,15 +1,21 @@
-import { useRouteError } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../stylesheets/errorPage.css";
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/");
+  };
 
   return (
     <div className="errorPage">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
+      <img src="" alt="" />
+      <h1>This Page Isn&rsquo;t Available</h1>
+      <p>The link may be broken, or the page may have been removed.</p>
+      <button type="button" className="errPageBtn" onClick={handleNavigate}>
+        Back to home
+      </button>
     </div>
   );
 }
