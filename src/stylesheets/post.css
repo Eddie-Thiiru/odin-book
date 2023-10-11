@@ -5,6 +5,7 @@
 }
 
 .post {
+  background-color: white;
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
@@ -20,14 +21,58 @@
 }
 
 .postFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postFooterOne {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
 }
 
-.postFooter > div {
+.postFooterOne > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commentFormContainer,
+.commentsContainer,
+.comment {
+  display: flex;
+  gap: 10px;
+}
+
+.commentForm,
+.comment,
+.commentUserWrapper {
+  flex: 1;
+}
+
+.commentForm {
+  position: relative;
+  display: flex;
+}
+
+.submitCommentBtn {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  right: 5px;
+  bottom: 5px;
+  padding: 5px;
+}
+
+.commentForm label,
+.commentForm input {
+  width: 100%;
 }
 
 .postMenuBtn {
