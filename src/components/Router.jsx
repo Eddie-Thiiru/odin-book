@@ -19,15 +19,15 @@ const Router = () => {
         { path: "friends/:name", element: <FriendsPage /> },
         { path: "profile", element: <Profile /> },
         { path: "profile/:name", element: <Profile /> },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "signup",
+          element: <SignUp />,
+        },
       ],
-    },
-    {
-      path: "login",
-      element: <Login />,
-    },
-    {
-      path: "signup",
-      element: <SignUp />,
     },
   ]);
 

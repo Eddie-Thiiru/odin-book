@@ -1,13 +1,52 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../stylesheets/loginPage.css";
 
 const Login = () => {
+  const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    let object = {};
+
+    formData.forEach((value, key) => {
+      object[key] = value;
+    });
+
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(object),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+
+        navigate("/");
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err.statusText);
+      });
+  };
+
   return (
     <div className="loginPage">
       <h1>odinbook</h1>
       <div className="loginWrapper">
-        <form className="loginForm">
+        <form className="loginForm" onSubmit={handleSubmit}>
           <div className="loginFormGrp">
             <label>
               <input
@@ -30,6 +69,9 @@ const Login = () => {
               />
             </label>
           </div>
+          {error === true && (
+            <span className="loginErrorMsg">Invalid email or password</span>
+          )}
           <button type="submit" className="loginBtn">
             Log in
           </button>
