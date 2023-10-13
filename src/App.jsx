@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
-      return;
+      return navigate("/login");
     }
 
     fetch("http://localhost:3000/isUserAuth", {

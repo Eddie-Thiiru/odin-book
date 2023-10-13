@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../stylesheets/header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
+
   return (
     <header className="appHeader">
       <h2>Odinbook</h2>
@@ -13,6 +21,9 @@ const Header = () => {
         <Link to={"/profile"}>
           <img src="" alt="account" />
         </Link>
+        <a href="" onClick={handleLogoutClick}>
+          Log out
+        </a>
       </nav>
     </header>
   );
