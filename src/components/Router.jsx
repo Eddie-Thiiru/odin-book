@@ -6,6 +6,7 @@ import Home from "./Homepage";
 import Login from "./LoginPage";
 import SignUp from "./SignUpPage";
 import ErrorPage from "./ErrorPage";
+import Anonymous from "./Anonymous";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -20,12 +21,11 @@ const Router = () => {
         { path: "profile", element: <Profile /> },
         { path: "profile/:name", element: <Profile /> },
         {
-          path: "login",
-          element: <Login />,
-        },
-        {
-          path: "signup",
-          element: <SignUp />,
+          element: <Anonymous />,
+          children: [
+            { path: "login", element: <Login /> },
+            { path: "signup", element: <SignUp /> },
+          ],
         },
       ],
     },
