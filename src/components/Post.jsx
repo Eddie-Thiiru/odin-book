@@ -1,19 +1,23 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import "../stylesheets/post.css";
 
-const Comment = () => {
+const Comment = ({ data }) => {
   return (
     <div className="comment">
       <img src="" alt="" />
       <div className="commentUserWrapper">
-        <h4>Example name</h4>
-        <p>Example comment</p>
+        <h4>{`${data.author.firstName} ${data.author.lastName}`}</h4>
+        <p>{data.timestamp}</p>
+      </div>
+      <div className="commentContent">
+        <p>{data.text}</p>
       </div>
     </div>
   );
 };
 
-const CommentSection = () => {
+const CommentSection = ({ comments }) => {
   return (
     <div className="commentsSection">
       <div className="commentFormContainer">
@@ -33,46 +37,46 @@ const CommentSection = () => {
         </form>
       </div>
       <div className="commentsContainer">
-        <Comment />
+        {comments.map((obj, index) => {
+          return <Comment key={index} data={obj} />;
+        })}
       </div>
     </div>
   );
 };
 
-const Post = () => {
+const Post = ({ data }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
 
   const openCommentsSection = () => {
     setCommentsOpen(true);
   };
 
-  // const closeCommentsSection = () => {
-  //   setCommentsOpen(false);
-  // };
+  const { author, text, comments, likes, timestamp } = data;
 
   return (
     <div className="post">
       <header className="postHeader">
         <img src="" alt="" />
         <div className="postUserWrapper">
-          <h4>Example name</h4>
-          <p>Example date</p>
+          <h4>{`${author.firstName} ${author.lastName}`}</h4>
+          <p>{timestamp}</p>
         </div>
         <button type="button" className="postMenuBtn">
           menu
         </button>
       </header>
       <div className="postContent">
-        <p>example text</p>
+        <p>{text}</p>
         {/* if there is an image create image */}
       </div>
       <footer className="postFooter">
         <div className="postFooterOne">
           <div>
-            {/* if only 1 like display as "like" else likes */}
-            <p>0 likes</p>
-            {/* if only 1 comment display as "comment"  else "comments*/}
-            <p>0 comments</p>
+            <p>{`${likes} ${likes === 1 ? "like" : "likes"}`}</p>
+            <p>{`${comments.length} ${
+              comments.length === 1 ? "comment" : "comments"
+            }`}</p>
           </div>
           <div>
             <button type="button" className="likeBtn">
@@ -87,10 +91,22 @@ const Post = () => {
             </button>
           </div>
         </div>
-        {commentsOpen === true && <CommentSection />}
+        {commentsOpen === true && <CommentSection comments={comments} />}
       </footer>
     </div>
   );
+};
+
+Post.propTypes = {
+  data: PropTypes.object,
+};
+
+CommentSection.propTypes = {
+  comments: PropTypes.array,
+};
+
+Comment.propTypes = {
+  data: PropTypes.object,
 };
 
 export default Post;

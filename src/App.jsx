@@ -4,10 +4,11 @@ import Header from "./components/Header";
 import PostModal from "./components/PostModal";
 import "./stylesheets/App.css";
 
-export const PostContext = createContext();
+export const AppContext = createContext();
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
+  const [user, setUser] = useState(null);
   const [isLoginLoading, setIsLoginLoading] = useState(true);
   const [postModalOpen, setPostModalOpen] = useState(false);
 
@@ -32,7 +33,6 @@ const App = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.message);
         if (data.message === "Authenticated") {
           setLoginStatus(true);
         }
@@ -42,8 +42,9 @@ const App = () => {
           .json()
           .then((err) => {
             if (err.message === "jwt expired") {
-              // Delete local token
+              // Delete local token and user
               localStorage.removeItem("token");
+              localStorage.removeItem("user");
 
               setLoginStatus(false);
               navigate("/login");
@@ -65,7 +66,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <PostContext.Provider
+      <AppContext.Provider
         value={{
           loginStatus,
           openNewPostModal,
@@ -83,7 +84,7 @@ const App = () => {
         )}
         {/* Adds PostModal using react-modal package */}
         <PostModal />
-      </PostContext.Provider>
+      </AppContext.Provider>
     </div>
   );
 };

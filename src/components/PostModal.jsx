@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Modal from "react-modal";
-import { PostContext } from "../App";
+import { AppContext } from "../App";
 
 import("../stylesheets/postModal.css");
 
@@ -18,7 +18,7 @@ const styles = {
 Modal.setAppElement("#root");
 
 const PostModal = () => {
-  const { closeNewPostModal, postModalOpen } = useContext(PostContext);
+  const { closeNewPostModal, postModalOpen } = useContext(AppContext);
 
   return (
     <Modal id="postModal" style={styles} isOpen={postModalOpen}>
