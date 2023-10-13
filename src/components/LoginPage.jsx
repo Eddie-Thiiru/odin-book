@@ -70,7 +70,7 @@ const Login = () => {
             </label>
           </div>
           {error === true && (
-            <span className="loginErrorMsg">Invalid email or password</span>
+            <span className="errorMsg">Invalid email or password</span>
           )}
           <button type="submit" className="loginBtn">
             Log in
