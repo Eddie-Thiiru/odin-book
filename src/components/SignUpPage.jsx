@@ -16,7 +16,7 @@ const SignUp = () => {
 
     const formData = new FormData(e.target);
 
-    const obj = {};
+    let obj = {};
 
     formData.forEach((value, key) => {
       obj[key] = value;

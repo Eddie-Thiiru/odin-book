@@ -13,9 +13,11 @@ const Home = () => {
 
   // Fetch all posts on component mount
   useEffect(() => {
-    fetch("http://localhost:3000/", {
+    fetch("http://localhost:3000/post", {
       method: "GET",
-      headers: { "Content-type": "application/json" },
+      headers: {
+        "Content-type": "application/json",
+      },
     })
       .then((response) => {
         if (!response.ok) {
