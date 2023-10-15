@@ -53,9 +53,9 @@ const CommentSection = ({
   );
 };
 
-const PostFooter = ({ likes, postComments, postId }) => {
+const PostFooter = ({ postLikes, postComments, postId }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
-  const [likesCount, setLikesCount] = useState(likes);
+  const [likes, setLikes] = useState(postLikes);
   const [comments, setComments] = useState(postComments);
   const [loading, setLoading] = useState(true);
   const [commentError, setCommentError] = useState({
@@ -84,6 +84,38 @@ const PostFooter = ({ likes, postComments, postId }) => {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const handlePostLike = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (likes.includes(user.id)) return;
+
+    let obj = { userId: user.id };
+
+    // Add user like to database
+    fetch(`http://localhost:3000/post/${postId}/like`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(obj),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+        return response.json();
+      })
+      .then(() => {
+        /* 
+          If like is added to database, manually add user id to likes array. 
+          This saves a few seconds since the api wil not filter parent post 
+          to send back likes array
+        */
+        setLikes([...comments, user.id]);
+      })
+      .catch((err) => {
+        console.log(err.statusText);
       });
   };
 
@@ -134,13 +166,13 @@ const PostFooter = ({ likes, postComments, postId }) => {
     <footer className="postFooter">
       <div className="postFooterOne">
         <div>
-          <p>{`${likesCount} ${likesCount === 1 ? "like" : "likes"}`}</p>
+          <p>{`${likes.length} ${likes.length === 1 ? "like" : "likes"}`}</p>
           <p>{`${comments.length} ${
             comments.length === 1 ? "comment" : "comments"
           }`}</p>
         </div>
         <div>
-          <button type="button" className="likeBtn">
+          <button type="button" className="likeBtn" onClick={handlePostLike}>
             Like
           </button>
           <button
@@ -185,7 +217,7 @@ const Post = ({ data }) => {
         <p>{text}</p>
         {/* if there is an image create image */}
       </div>
-      <PostFooter likes={likes} postComments={comments} postId={data._id} />
+      <PostFooter postLikes={likes} postComments={comments} postId={data._id} />
     </div>
   );
 };
@@ -195,7 +227,7 @@ Post.propTypes = {
 };
 
 PostFooter.propTypes = {
-  likes: PropTypes.number,
+  postLikes: PropTypes.array,
   postComments: PropTypes.array,
   postId: PropTypes.string,
 };
