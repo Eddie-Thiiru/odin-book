@@ -1,15 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import AppContext from "./components/utils/appContext";
 import Header from "./components/Header";
 import PostModal from "./components/PostModal";
-import "./stylesheets/App.css";
 
-export const AppContext = createContext();
+import "./stylesheets/App.css";
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
-  const [user, setUser] = useState(null);
-  const [isLoginLoading, setIsLoginLoading] = useState(true);
   const [postModalOpen, setPostModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -64,6 +62,10 @@ const App = () => {
     setPostModalOpen(false);
   };
 
+  const refreshPage = () => {
+    navigate(0);
+  };
+
   return (
     <div className="App">
       <AppContext.Provider
@@ -72,6 +74,7 @@ const App = () => {
           openNewPostModal,
           closeNewPostModal,
           postModalOpen,
+          refreshPage,
         }}
       >
         {loginStatus === false ? (

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../App";
+import AppContext from "./utils/appContext";
 import Post from "./Post";
 
 import "../stylesheets/homepage.css";
