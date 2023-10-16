@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import AppContext from "./utils/appContext";
 import "../stylesheets/post.css";
-import { useNavigate } from "react-router-dom";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const CommentSection = ({
   loading,
   comments,
   handleCommentSubmit,
+  handleCommentDelete,
   commentError,
 }) => {
   return (
@@ -41,6 +44,11 @@ const CommentSection = ({
                 <div className="commentUserWrapper">
                   <h4>{`${obj.author.firstName} ${obj.author.lastName}`}</h4>
                   <p>{obj.timestamp}</p>
+                  {obj.author._id === user.id && (
+                    <a href="#" onClick={handleCommentDelete}>
+                      delete
+                    </a>
+                  )}
                 </div>
                 <div className="commentContent">
                   <p>{obj.text}</p>
@@ -89,12 +97,11 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
   };
 
   const handlePostLike = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
     const obj = { userId: user.id };
 
     if (likes.includes(user.id)) {
-      // Remove user like to database
-      fetch(`http://localhost:3000/post/${postId}/like/${user.id}`, {
+      // Remove user like from database
+      fetch(`http://localhost:3000/post/${postId}/likes/${user.id}`, {
         method: "DELETE",
         headers: { "Content-type": "application/json" },
       })
@@ -116,7 +123,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         });
     } else {
       // Add user like to database
-      fetch(`http://localhost:3000/post/${postId}/like`, {
+      fetch(`http://localhost:3000/post/${postId}/likes`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(obj),
@@ -141,12 +148,31 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
     }
   };
 
+  const handleCommentDelete = () => {
+    // Remove user comment from database
+    fetch(`http://localhost:3000/post/${postId}/comments/${user.id}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        console.log(err.statusText);
+      });
+  };
+
   // Handle new comment submit
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const user = JSON.parse(localStorage.getItem("user"));
     let obj = { userId: user.id };
 
     formData.forEach((value, key) => {
@@ -154,7 +180,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
     });
 
     // Add submitted comment to database
-    fetch(`http://localhost:3000/post/${postId}/comment`, {
+    fetch(`http://localhost:3000/post/${postId}/comments`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(obj),
@@ -213,6 +239,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
           loading={loading}
           comments={comments}
           handleCommentSubmit={handleCommentSubmit}
+          handleCommentDelete={handleCommentDelete}
           commentError={commentError}
         />
       )}
@@ -222,11 +249,29 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 
 const Post = ({ data }) => {
   const [menu, setMenu] = useState(false);
-
-  const navigate = useNavigate();
+  const { refreshPage } = useContext(AppContext);
 
   const toggleMenu = () => {
     setMenu(!menu);
+  };
+
+  const handlePostDelete = () => {
+    fetch(`http://localhost:3000/post/${data._id}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+        return response.json();
+      })
+      .then(() => {
+        refreshPage();
+      })
+      .catch((err) => {
+        console.log(err.statusText);
+      });
   };
 
   const { author, text, comments, likes, timestamp } = data;
@@ -239,13 +284,19 @@ const Post = ({ data }) => {
           <h4>{`${author.firstName} ${author.lastName}`}</h4>
           <p>{timestamp}</p>
         </div>
-        <button type="button" className="postMenuBtn" onClick={toggleMenu}>
-          menu
-        </button>
+        {user.id === author._id && (
+          <button type="button" className="postMenuBtn" onClick={toggleMenu}>
+            menu
+          </button>
+        )}
       </header>
       {menu === true && (
         <div className="menuDropDowncontainer">
-          <button type="button" className="deletePostBtn">
+          <button
+            type="button"
+            className="deletePostBtn"
+            onClick={handlePostDelete}
+          >
             Delete Post
           </button>
         </div>
@@ -273,6 +324,7 @@ CommentSection.propTypes = {
   loading: PropTypes.bool,
   comments: PropTypes.array,
   handleCommentSubmit: PropTypes.func,
+  handleCommentDelete: PropTypes.func,
   commentError: PropTypes.object,
 };
 
