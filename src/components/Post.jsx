@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "../stylesheets/post.css";
+import { useNavigate } from "react-router-dom";
 
 const CommentSection = ({
   loading,
@@ -89,34 +90,55 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 
   const handlePostLike = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const obj = { userId: user.id };
 
-    if (likes.includes(user.id)) return;
-
-    let obj = { userId: user.id };
-
-    // Add user like to database
-    fetch(`http://localhost:3000/post/${postId}/like`, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(obj),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject(response);
-        }
-        return response.json();
+    if (likes.includes(user.id)) {
+      // Remove user like to database
+      fetch(`http://localhost:3000/post/${postId}/like/${user.id}`, {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
       })
-      .then(() => {
-        /* 
+        .then((response) => {
+          if (!response.ok) {
+            return Promise.reject(response);
+          }
+          return response.json();
+        })
+        .then(() => {
+          /* 
+          If like is removed from the database, manually remove user id 
+          from the likes array. 
+        */
+          setLikes(likes.filter((str) => str !== user.id));
+        })
+        .catch((err) => {
+          console.log(err.statusText);
+        });
+    } else {
+      // Add user like to database
+      fetch(`http://localhost:3000/post/${postId}/like`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(obj),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            return Promise.reject(response);
+          }
+          return response.json();
+        })
+        .then(() => {
+          /* 
           If like is added to database, manually add user id to likes array. 
           This saves a few seconds since the api wil not filter parent post 
           to send back likes array
         */
-        setLikes([...comments, user.id]);
-      })
-      .catch((err) => {
-        console.log(err.statusText);
-      });
+          setLikes([...comments, user.id]);
+        })
+        .catch((err) => {
+          console.log(err.statusText);
+        });
+    }
   };
 
   // Handle new comment submit
@@ -199,6 +221,14 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 };
 
 const Post = ({ data }) => {
+  const [menu, setMenu] = useState(false);
+
+  const navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setMenu(!menu);
+  };
+
   const { author, text, comments, likes, timestamp } = data;
 
   return (
@@ -209,10 +239,17 @@ const Post = ({ data }) => {
           <h4>{`${author.firstName} ${author.lastName}`}</h4>
           <p>{timestamp}</p>
         </div>
-        <button type="button" className="postMenuBtn">
+        <button type="button" className="postMenuBtn" onClick={toggleMenu}>
           menu
         </button>
       </header>
+      {menu === true && (
+        <div className="menuDropDowncontainer">
+          <button type="button" className="deletePostBtn">
+            Delete Post
+          </button>
+        </div>
+      )}
       <div className="postContent">
         <p>{text}</p>
         {/* if there is an image create image */}
