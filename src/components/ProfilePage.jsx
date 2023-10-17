@@ -2,60 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Post from "./Post";
+import FriendsList from "./FriendsList";
 
 import("../stylesheets/profilePage.css");
-
-const Friends = ({ id }) => {
-  const [loading, setLoading] = useState(true);
-  const [friends, setFriends] = useState();
-
-  // Fetch user friends on component mount
-  useEffect(() => {
-    fetch(`http://localhost:3000/profile/${id}/friends`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject(response);
-        }
-
-        return response.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        setFriends(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
-
-  return (
-    <section className="profileFriends">
-      <h3>All friends</h3>
-      <div className="friendsContainer">
-        {loading === false && friends.length > 0
-          ? friends.map((friend, index) => {
-              return (
-                <div key={index} className="friend">
-                  <img src="" alt="" />
-                  <p>{`${friend.firstName} ${friend.lastName}`}</p>
-                  <button type="button" className="removeFriendBtn">
-                    Unfriend
-                  </button>
-                </div>
-              );
-            })
-          : loading === false && (
-              <div className="emptyFriendsIndicator">No friends</div>
-            )}
-      </div>
-    </section>
-  );
-};
 
 const About = ({ bio }) => {
   return (
@@ -238,7 +187,7 @@ const Profile = () => {
             {name === "about" ? (
               <About bio={user.bio} />
             ) : name === "friends" ? (
-              <Friends id={id} />
+              <FriendsList id={id} />
             ) : (
               <section className="profileHome">
                 <ProfileHomeFriends id={id} />
@@ -250,10 +199,6 @@ const Profile = () => {
       )}
     </div>
   );
-};
-
-Friends.propTypes = {
-  id: PropTypes.string,
 };
 
 ProfileHomePosts.propTypes = {

@@ -1,24 +1,9 @@
-import { useParams, useNavigate } from "react-router-dom";
-
-import "../stylesheets/friendsPage.css";
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import FriendsList from "./FriendsList";
+import "../stylesheets/friendsPage.css";
 
-const List = () => {
-  return (
-    <section className="friendsList">
-      <h2>All friends</h2>
-      <div className="friendsContainer">
-        <div className="friend">
-          <img src="" alt="" />
-          <p>example suggest</p>
-          <button type="button" className="removeFriendBtn">
-            Unfriend
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-};
+const user = JSON.parse(localStorage.getItem("user"));
 
 const Suggestions = () => {
   const [loading, setLoading] = useState(true);
@@ -26,8 +11,6 @@ const Suggestions = () => {
 
   // Fetch user details on component mount
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
     fetch(`http://localhost:3000/profile/${user.id}/suggestions`, {
       method: "GET",
       headers: {
@@ -50,6 +33,27 @@ const Suggestions = () => {
       });
   }, []);
 
+  // Send friend request
+  const sendFriendRequest = (requestId) => {
+    fetch(`http://localhost:3000/profile/${user.id}/requests/${requestId}`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        return response.json();
+      })
+      .then(() => {
+        setSuggestions(suggestions.filter((a) => a._id !== requestId));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section className="suggestionsSection">
       <h2>People You May Know</h2>
@@ -61,7 +65,11 @@ const Suggestions = () => {
                   <img src="" alt="" />
                   <p>{`${user.firstName} ${user.lastName}`}</p>
                   <div>
-                    <button type="button" className="addFriendBtn">
+                    <button
+                      type="button"
+                      className="addFriendBtn"
+                      onClick={() => sendFriendRequest(`${user._id}`)}
+                    >
                       Add friend
                     </button>
                   </div>
@@ -82,8 +90,6 @@ const Requests = () => {
 
   // Fetch user details on component mount
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
     fetch(`http://localhost:3000/profile/${user.id}/requests`, {
       method: "GET",
       headers: {
@@ -106,6 +112,48 @@ const Requests = () => {
       });
   }, []);
 
+  // Accept friend requests
+  const acceptFriendRequest = (requestId) => {
+    fetch(`http://localhost:3000/profile/${user.id}/friends/${requestId}`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        return response.json();
+      })
+      .then(() => {
+        setRequests(requests.filter((a) => a._id !== requestId));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Delete friend requests
+  const removeFriendRequest = (requestId) => {
+    fetch(`http://localhost:3000/profile/${user.id}/requests/${requestId}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        return response.json();
+      })
+      .then(() => {
+        setRequests(requests.filter((a) => a._id !== requestId));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section className="requestsSection">
       <h2>Friend Requests</h2>
@@ -117,10 +165,18 @@ const Requests = () => {
                   <img src="" alt="" />
                   <p>{`${user.firstName} ${user.lastName}`}</p>
                   <div>
-                    <button type="button" className="confirmReqBtn">
+                    <button
+                      type="button"
+                      className="confirmReqBtn"
+                      onClick={() => acceptFriendRequest(`${user._id}`)}
+                    >
                       Confirm
                     </button>
-                    <button type="button" className="delReqBtn">
+                    <button
+                      type="button"
+                      className="delReqBtn"
+                      onClick={() => removeFriendRequest(`${user._id}`)}
+                    >
                       Delete
                     </button>
                   </div>
@@ -164,14 +220,21 @@ const FriendsPage = () => {
           <img src="" alt="" />
           <p>Suggestions</p>
         </div>
+        <div
+          className="sidebarGrp"
+          onClick={() => handleNavigation("friends/friends")}
+        >
+          <img src="" alt="" />
+          <p>All friends</p>
+        </div>
       </div>
       <div className="friendsPageMain">
         {name === "requests" ? (
           <Requests />
         ) : name === "suggestions" ? (
           <Suggestions />
-        ) : name === "list" ? (
-          <List />
+        ) : name === "friends" ? (
+          <FriendsList id={user.id} />
         ) : (
           <>
             <Requests />
