@@ -11,6 +11,7 @@ const Header = () => {
     navigate("/login");
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <header className="appHeader">
       <h2>Odinbook</h2>
@@ -18,7 +19,7 @@ const Header = () => {
         <Link to={"/"}>Home</Link>
       </nav>
       <nav className="headerNavTwo">
-        <Link to={"/profile"}>
+        <Link to={`/profile/${user.id}`}>
           <img src="" alt="account" />
         </Link>
         <a href="" onClick={handleLogoutClick}>

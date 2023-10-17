@@ -35,11 +35,15 @@ const Home = () => {
       });
   }, []);
 
-  const handleNavigation = (path) => {
-    navigate(`/${path}`);
-  };
-
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleNavigation = (path) => {
+    if (path === "friends") {
+      navigate(`/${path}`);
+    } else {
+      navigate(`/profile/${user.id}`);
+    }
+  };
 
   return (
     <div className="homepage">

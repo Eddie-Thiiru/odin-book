@@ -66,8 +66,11 @@ const App = () => {
     navigate(0);
   };
 
+  const token = localStorage.getItem("token");
+
   return (
     <div className="App">
+      {token !== null && <Header />}
       <AppContext.Provider
         value={{
           loginStatus,
@@ -77,14 +80,8 @@ const App = () => {
           refreshPage,
         }}
       >
-        {loginStatus === false ? (
-          <Outlet />
-        ) : (
-          <>
-            <Header />
-            <Outlet />
-          </>
-        )}
+        <Outlet />
+
         {/* Adds PostModal using react-modal package */}
         <PostModal />
       </AppContext.Provider>

@@ -16,10 +16,13 @@ const Router = () => {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <Home /> },
+        // React-router-dom v6 does not currently support optional params.
+        // Therefore, add routes to match either path and render the same component.
         { path: "friends", element: <FriendsPage /> },
         { path: "friends/:name", element: <FriendsPage /> },
         { path: "profile", element: <Profile /> },
-        { path: "profile/:name", element: <Profile /> },
+        { path: "profile/:id", element: <Profile /> },
+        { path: "profile/:id/:name", element: <Profile /> },
         {
           element: <Anonymous />,
           children: [
