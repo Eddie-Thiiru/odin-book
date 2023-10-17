@@ -3,12 +3,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 import AppContext from "./components/utils/appContext";
 import Header from "./components/Header";
 import PostModal from "./components/PostModal";
+import BioModal from "./components/BioModal";
 
 import "./stylesheets/App.css";
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
   const [postModalOpen, setPostModalOpen] = useState(false);
+  const [bioModalOpen, setBioModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,6 +64,14 @@ const App = () => {
     setPostModalOpen(false);
   };
 
+  const openBioModal = () => {
+    setBioModalOpen(true);
+  };
+
+  const closeBioModal = () => {
+    setBioModalOpen(false);
+  };
+
   const refreshPage = () => {
     navigate(0);
   };
@@ -77,13 +87,17 @@ const App = () => {
           openNewPostModal,
           closeNewPostModal,
           postModalOpen,
+          openBioModal,
+          closeBioModal,
+          bioModalOpen,
           refreshPage,
         }}
       >
         <Outlet />
 
-        {/* Adds PostModal using react-modal package */}
+        {/* Adds modals using react-modal package */}
         <PostModal />
+        <BioModal />
       </AppContext.Provider>
     </div>
   );

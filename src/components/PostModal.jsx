@@ -47,15 +47,13 @@ const PostModal = () => {
         }
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         refreshPage();
       })
       .catch((err) => {
         err
           .json()
           .then((data) => {
-            console.log(data);
             setPostError({
               ...postError,
               hasError: true,

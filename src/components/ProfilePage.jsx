@@ -1,18 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import AppContext from "./utils/appContext";
 import Post from "./Post";
 import FriendsList from "./FriendsList";
 
 import("../stylesheets/profilePage.css");
 
-const About = ({ bio }) => {
+const About = ({ bio, userId }) => {
+  const { openBioModal } = useContext(AppContext);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <section className="profileAbout">
       {bio === undefined ? (
         <div className="emptyBioIndicator">No Bio</div>
       ) : (
         <p>{bio}</p>
+      )}
+      {user.id === userId && (
+        <button type="button" className="bioOpenBtn" onClick={openBioModal}>
+          Edit bio
+        </button>
       )}
     </section>
   );
@@ -185,7 +195,7 @@ const Profile = () => {
           </header>
           <div className="profileMain">
             {name === "about" ? (
-              <About bio={user.bio} />
+              <About bio={user.bio} userId={user._id} />
             ) : name === "friends" ? (
               <FriendsList id={id} />
             ) : (
@@ -211,6 +221,7 @@ ProfileHomeFriends.propTypes = {
 
 About.propTypes = {
   bio: PropTypes.string,
+  userId: PropTypes.string,
 };
 
 export default Profile;
