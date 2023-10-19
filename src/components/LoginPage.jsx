@@ -8,7 +8,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -43,11 +43,35 @@ const Login = () => {
       });
   };
 
+  const handleDemoLogin = () => {
+    fetch("http://localhost:3000/login/guest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        navigate("/");
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err.statusText);
+      });
+  };
+
   return (
     <div className="loginPage">
       <h1>odinbook</h1>
       <div className="loginWrapper">
-        <form className="loginForm" onSubmit={handleSubmit}>
+        <form className="loginForm" onSubmit={handleLoginSubmit}>
           <div className="loginFormGrp">
             <label>
               <input
@@ -80,6 +104,13 @@ const Login = () => {
             Log in with Facebook
           </button>
         </form>
+        <button
+          type="button"
+          className="loginDemoBtn"
+          onClick={handleDemoLogin}
+        >
+          Login as visitor
+        </button>
         <Link to={"/signup"}>Create New Account</Link>
       </div>
     </div>

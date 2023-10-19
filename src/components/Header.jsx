@@ -14,7 +14,9 @@ const Header = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return (
     <header className="appHeader">
-      <h2>Odinbook</h2>
+      <div className="siteBanner">
+        <Link to={"/"}>Odinbook</Link>
+      </div>
       <nav className="headerNavOne">
         <Link to={"/"}>Home</Link>
       </nav>

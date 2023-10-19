@@ -9,6 +9,8 @@ const Suggestions = () => {
   const [loading, setLoading] = useState(true);
   const [suggestions, setSuggestions] = useState();
 
+  const navigate = useNavigate();
+
   // Fetch user details on component mount
   useEffect(() => {
     fetch(`http://localhost:3000/profile/${user.id}/suggestions`, {
@@ -54,6 +56,10 @@ const Suggestions = () => {
       });
   };
 
+  const navigateToProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   return (
     <section className="suggestionsSection">
       <h2>People You May Know</h2>
@@ -62,8 +68,14 @@ const Suggestions = () => {
           ? suggestions.map((user, index) => {
               return (
                 <div key={index} className="userRequest">
-                  <img src="" alt="" />
-                  <p>{`${user.firstName} ${user.lastName}`}</p>
+                  <img
+                    src=""
+                    alt=""
+                    onClick={() => navigateToProfile(user._id)}
+                  />
+                  <a
+                    href={`/profile/${user._id}`}
+                  >{`${user.firstName} ${user.lastName}`}</a>
                   <div>
                     <button
                       type="button"
@@ -87,6 +99,8 @@ const Suggestions = () => {
 const Requests = () => {
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState();
+
+  const navigate = useNavigate();
 
   // Fetch user details on component mount
   useEffect(() => {
@@ -154,6 +168,10 @@ const Requests = () => {
       });
   };
 
+  const navigateToProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   return (
     <section className="requestsSection">
       <h2>Friend Requests</h2>
@@ -162,8 +180,14 @@ const Requests = () => {
           ? requests.map((user, index) => {
               return (
                 <div key={index} className="userRequest">
-                  <img src="" alt="" />
-                  <p>{`${user.firstName} ${user.lastName}`}</p>
+                  <img
+                    src=""
+                    alt=""
+                    onClick={() => navigateToProfile(user._id)}
+                  />
+                  <a
+                    href={`/profile/${user._id}`}
+                  >{`${user.firstName} ${user.lastName}`}</a>
                   <div>
                     <button
                       type="button"

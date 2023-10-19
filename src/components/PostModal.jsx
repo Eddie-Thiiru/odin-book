@@ -27,9 +27,12 @@ const PostModal = () => {
     msg: "",
     src: "",
   });
-  const { closeNewPostModal, postModalOpen, refreshPage } =
-    useContext(AppContext);
+  const { closeNewPostModal, postModalOpen } = useContext(AppContext);
   const fileInput = useRef();
+
+  const reload = () => {
+    window.location.reload();
+  };
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +58,7 @@ const PostModal = () => {
         return response.json();
       })
       .then(() => {
-        refreshPage();
+        reload();
       })
       .catch((err) => {
         err

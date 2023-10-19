@@ -42,7 +42,9 @@ const CommentSection = ({
               <div className="comment" key={index}>
                 <img src="" alt="" />
                 <div className="commentUserWrapper">
-                  <h4>{`${obj.author.firstName} ${obj.author.lastName}`}</h4>
+                  <a
+                    href={`/profile/${obj.author._id}`}
+                  >{`${obj.author.firstName} ${obj.author.lastName}`}</a>
                   <p>{obj.timestamp}</p>
                   {obj.author._id === user.id && (
                     <a href="#" onClick={handleCommentDelete}>
@@ -288,7 +290,9 @@ const Post = ({ data }) => {
       <header className="postHeader">
         <img src="" alt="" />
         <div className="postUserWrapper">
-          <h4>{`${author.firstName} ${author.lastName}`}</h4>
+          <a
+            href={`/profile/${author._id}`}
+          >{`${author.firstName} ${author.lastName}`}</a>
           <p>{timestamp}</p>
         </div>
         {user.id === author._id && (

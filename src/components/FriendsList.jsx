@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const FriendsList = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [friends, setFriends] = useState();
+
+  const navigate = useNavigate();
 
   // Fetch user friends on component mount
   useEffect(() => {
@@ -50,6 +53,10 @@ const FriendsList = ({ id }) => {
       });
   };
 
+  const navigateToProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   return (
     <section className="friendsList">
       <h3>All friends</h3>
@@ -58,8 +65,14 @@ const FriendsList = ({ id }) => {
           ? friends.map((friend, index) => {
               return (
                 <div key={index} className="friend">
-                  <img src="" alt="" />
-                  <p>{`${friend.firstName} ${friend.lastName}`}</p>
+                  <img
+                    src=""
+                    alt=""
+                    onClick={() => navigateToProfile(friend._id)}
+                  />
+                  <a
+                    href={`/profile/${friend._id}`}
+                  >{`${friend.firstName} ${friend.lastName}`}</a>
                   <button
                     type="button"
                     className="removeFriendBtn"

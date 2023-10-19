@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppContext from "./utils/appContext";
 import Post from "./Post";
@@ -31,6 +31,7 @@ const About = ({ bio, userId }) => {
 const ProfileHomePosts = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState();
+  const { openNewPostModal } = useContext(AppContext);
 
   // Fetch user posts on component mount
   useEffect(() => {
@@ -56,13 +57,21 @@ const ProfileHomePosts = ({ id }) => {
       });
   }, [id]);
 
+  const userToken = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="profileHomePosts">
       <div>
         <img src="" alt="" />
-        <button type="button" className="homeCreateBtn">
-          `What&apos;s on your mind?`
-        </button>
+        {userToken.id === id && (
+          <button
+            type="button"
+            className="homeCreateBtn"
+            onClick={openNewPostModal}
+          >
+            `What&apos;s on your mind?`
+          </button>
+        )}
       </div>
       <div className="postsContainer">
         {loading === false && posts.length > 0
@@ -80,6 +89,8 @@ const ProfileHomePosts = ({ id }) => {
 const ProfileHomeFriends = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [friends, setFriends] = useState();
+
+  const navigate = useNavigate();
 
   // Fetch user friends on component mount
   useEffect(() => {
@@ -105,6 +116,10 @@ const ProfileHomeFriends = ({ id }) => {
       });
   }, [id]);
 
+  const navigateToProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   return (
     <div className="profileHomeFriends">
       <div className="profileHomeFriendsWrapper">
@@ -124,8 +139,14 @@ const ProfileHomeFriends = ({ id }) => {
             ? friends.map((friend, index) => {
                 return (
                   <div key={index} className="friend">
-                    <img src="" alt="" />
-                    <p>{`${friend.firstName} ${friend.lastName}`}</p>
+                    <img
+                      src=""
+                      alt=""
+                      onClick={() => navigateToProfile(friend._id)}
+                    />
+                    <a
+                      href={`/profile/${friend._id}`}
+                    >{`${friend.firstName} ${friend.lastName}`}</a>
                   </div>
                 );
               })
@@ -161,17 +182,20 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
-        const arrayBuffer = data.profilePicture.data;
-        const base64String = btoa(
-          String.fromCharCode(...new Uint8Array(arrayBuffer))
-        );
+        if (data.profilePicture !== undefined) {
+          const arrayBuffer = data.profilePicture.data;
+          const base64String = btoa(
+            String.fromCharCode(...new Uint8Array(arrayBuffer))
+          );
+
+          setProfileImage(base64String);
+        }
 
         setUserLoading(false);
         setUser(data);
-        setProfileImage(base64String);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.statusText);
       });
   }, [id]);
 

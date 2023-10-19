@@ -24,7 +24,6 @@ const App = () => {
     fetch("http://localhost:3000/isUserAuth", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
@@ -83,10 +82,6 @@ const App = () => {
     setPhotoModalOpen(false);
   };
 
-  const refreshPage = () => {
-    navigate(0);
-  };
-
   const token = localStorage.getItem("token");
 
   return (
@@ -104,7 +99,6 @@ const App = () => {
           openPhotoModal,
           closePhotoModal,
           photoModalOpen,
-          refreshPage,
         }}
       >
         <Outlet />
