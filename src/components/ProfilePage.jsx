@@ -141,8 +141,11 @@ const ProfileHomeFriends = ({ id }) => {
 const Profile = () => {
   const [userLoading, setUserLoading] = useState(true);
   const [user, setUser] = useState();
-
+  const [profileImage, setProfileImage] = useState("");
+  const { openPhotoModal } = useContext(AppContext);
   const { id, name } = useParams();
+
+  let base64String = "";
 
   // Fetch user details on component mount
   useEffect(() => {
@@ -160,13 +163,21 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
+        const arrayBuffer = data.profilePicture.data;
+        const base64String = btoa(
+          String.fromCharCode(...new Uint8Array(arrayBuffer))
+        );
+
         setUserLoading(false);
         setUser(data);
+        setProfileImage(base64String);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [id]);
+
+  const userToken = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className="profilePage">
@@ -175,10 +186,16 @@ const Profile = () => {
           <header className="profilePageHeader">
             <div className="profileHeaderOne">
               <div className="profilePhotWrapper">
-                <img src="" alt="" />
-                <button type="button" className="changePhotoBtn">
-                  change
-                </button>
+                <img src={`data:image/png;base64,${profileImage}`} alt="" />
+                {userToken.id === user._id && (
+                  <button
+                    type="button"
+                    className="changePhotoBtn"
+                    onClick={openPhotoModal}
+                  >
+                    change
+                  </button>
+                )}
               </div>
               <div className="profileNameWrapper">
                 <h2>{`${user.firstName} ${user.lastName}`}</h2>
