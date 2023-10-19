@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
@@ -18,28 +18,35 @@ const styles = {
 Modal.setAppElement("#root");
 
 const PostModal = () => {
-  const [postError, setPostError] = useState({
+  const [textError, setTextError] = useState({
     hasError: false,
     msg: "",
   });
+  const [photo, setPhoto] = useState({
+    error: false,
+    msg: "",
+    src: "",
+  });
   const { closeNewPostModal, postModalOpen, refreshPage } =
     useContext(AppContext);
+  const fileInput = useRef();
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
 
+    if (photo.src === "") {
+      return;
+    }
+
     const formData = new FormData(e.target);
     const user = JSON.parse(localStorage.getItem("user"));
-    let obj = { userId: user.id };
 
-    formData.forEach((value, key) => {
-      obj[key] = value;
-    });
+    formData.append("userId", user.id);
+    formData.append("file", fileInput.current.files[0]);
 
     fetch("http://localhost:3000/post", {
       method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(obj),
+      body: formData,
     })
       .then((response) => {
         if (!response.ok) {
@@ -54,8 +61,8 @@ const PostModal = () => {
         err
           .json()
           .then((data) => {
-            setPostError({
-              ...postError,
+            setTextError({
+              ...textError,
               hasError: true,
               msg: data.errors,
             });
@@ -64,6 +71,45 @@ const PostModal = () => {
             console.log(genericError.statusText);
           });
       });
+  };
+
+  const validFileType = (file) => {
+    const fileTypes = ["image/jpeg", "image/png"];
+
+    return fileTypes.includes(file.type);
+  };
+
+  const updateImageDisplay = (e) => {
+    const input = e.target;
+    const curFiles = input.files;
+
+    if (curFiles.length === 0) {
+      // reset state when photo unselected
+      setPhoto({ error: false, msg: "", src: "" });
+    } else {
+      for (const file of curFiles) {
+        // Check if file is valid
+        if (validFileType(file)) {
+          // Display error when file exceeds limit
+          if (file.size > 1000000) {
+            setPhoto({
+              error: true,
+              msg: "Photo should not exceed 1 MB",
+              src: "",
+            });
+          } else {
+            // Display image when file is within limit
+            setPhoto({ error: false, msg: "", src: URL.createObjectURL(file) });
+          }
+        } else {
+          setPhoto({
+            error: true,
+            msg: "Not a valid file type (PNG or JPEG)",
+            src: "",
+          });
+        }
+      }
+    }
   };
 
   return (
@@ -87,23 +133,32 @@ const PostModal = () => {
               name="text"
               placeholder="What's on your mind?"
               rows={6}
+              maxLength={3000}
               required
             />
           </label>
-          {postError.hasError === true && (
-            <span className="errorMsg">{postError.msg}</span>
+          {textError.hasError === true && (
+            <span className="errorMsg">{textError.msg}</span>
           )}
         </div>
         <div className="postModalFormGrp">
           <label>
             Add Photos
             <input
+              ref={fileInput}
               type="file"
               id="postPhotoInput"
               name="postPhoto"
-              accept="image/png, image/jpg"
+              accept="image/png, image/jpeg"
+              onChange={updateImageDisplay}
             />
           </label>
+          {photo.error === true && (
+            <span className="fileErrorMsg">{photo.msg}</span>
+          )}
+        </div>
+        <div className="postModalFormGrp">
+          <img src={photo.src} alt="" />
         </div>
         <button type="submit" className="addPostBtn">
           Post

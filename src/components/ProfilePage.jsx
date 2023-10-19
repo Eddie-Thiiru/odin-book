@@ -145,8 +145,6 @@ const Profile = () => {
   const { openPhotoModal } = useContext(AppContext);
   const { id, name } = useParams();
 
-  let base64String = "";
-
   // Fetch user details on component mount
   useEffect(() => {
     fetch(`http://localhost:3000/profile/${id}`, {

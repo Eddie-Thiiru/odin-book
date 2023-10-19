@@ -4,6 +4,7 @@ import AppContext from "./components/utils/appContext";
 import Header from "./components/Header";
 import PostModal from "./components/PostModal";
 import BioModal from "./components/BioModal";
+import PhotoModal from "./components/PhotoModal";
 
 import "./stylesheets/App.css";
 
@@ -11,6 +12,7 @@ const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
   const [postModalOpen, setPostModalOpen] = useState(false);
   const [bioModalOpen, setBioModalOpen] = useState(false);
+  const [photoModalOpen, setPhotoModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ const App = () => {
     fetch("http://localhost:3000/isUserAuth", {
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
@@ -72,6 +75,14 @@ const App = () => {
     setBioModalOpen(false);
   };
 
+  const openPhotoModal = () => {
+    setPhotoModalOpen(true);
+  };
+
+  const closePhotoModal = () => {
+    setPhotoModalOpen(false);
+  };
+
   const refreshPage = () => {
     navigate(0);
   };
@@ -90,6 +101,9 @@ const App = () => {
           openBioModal,
           closeBioModal,
           bioModalOpen,
+          openPhotoModal,
+          closePhotoModal,
+          photoModalOpen,
           refreshPage,
         }}
       >
@@ -98,6 +112,7 @@ const App = () => {
         {/* Adds modals using react-modal package */}
         <PostModal />
         <BioModal />
+        <PhotoModal />
       </AppContext.Provider>
     </div>
   );

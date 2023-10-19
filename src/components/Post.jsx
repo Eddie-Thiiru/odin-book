@@ -221,7 +221,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         </div>
         <div>
           <button type="button" className="likeBtn" onClick={handlePostLike}>
-            Like
+            {likes.includes(`${user.id}`) ? "liked" : "like"}
           </button>
           <button
             type="button"
@@ -251,6 +251,8 @@ const Post = ({ data }) => {
   const [menu, setMenu] = useState(false);
   const { refreshPage } = useContext(AppContext);
 
+  let base64String = "";
+
   const toggleMenu = () => {
     setMenu(!menu);
   };
@@ -274,7 +276,12 @@ const Post = ({ data }) => {
       });
   };
 
-  const { author, text, comments, likes, timestamp } = data;
+  const { author, text, photo, comments, likes, timestamp } = data;
+
+  if (photo !== undefined) {
+    const arrayBuffer = photo.data;
+    base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+  }
 
   return (
     <div className="post">
@@ -303,7 +310,9 @@ const Post = ({ data }) => {
       )}
       <div className="postContent">
         <p>{text}</p>
-        {/* if there is an image create image */}
+        {photo !== undefined && (
+          <img src={`data:image/png;base64,${base64String}`} alt="" />
+        )}
       </div>
       <PostFooter postLikes={likes} postComments={comments} postId={data._id} />
     </div>

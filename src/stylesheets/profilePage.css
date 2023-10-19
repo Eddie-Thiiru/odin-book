@@ -107,3 +107,8 @@
 .profilePageHeader a {
   padding: 15px;
 }
+
+.profileHeaderOne img {
+  height: 100px;
+  width: 100px;
+}
