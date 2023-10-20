@@ -1,28 +1,29 @@
 .profilePage {
+  height: 100%;
   min-width: 320px;
   padding: 20px;
   display: grid;
+  grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
   grid-template-rows: 200px 1fr;
-  justify-content: center;
-}
-
-.profileAbout,
-.profileFriends {
-  padding: 15px;
+  justify-items: center;
 }
 
 .profilePageHeader {
-  min-width: 600px;
-  max-width: 1200px;
+  grid-column: 2 / 3;
+  width: 100%;
   display: grid;
   grid-template-rows: 2fr 1fr;
 }
 
 .profileMain {
-  min-width: 600px;
-  max-width: 1200px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  width: 100%;
+}
 
+.profileHeaderOne {
   display: flex;
+  gap: 20px;
 }
 
 .profilePageHeader nav {
@@ -30,10 +31,16 @@
   align-items: center;
 }
 
-.profileHeaderFriends {
+.profilePhotoWrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-items: center;
+}
+
+.profileNameWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .profileMain section {
@@ -42,7 +49,18 @@
 
 .profileHome {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(400px, 1fr) 2fr;
+}
+
+.profileAbout,
+.profileFriends {
+  padding: 15px;
+}
+
+.profileAbout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profileHomeFriends,
@@ -53,9 +71,16 @@
   flex-direction: column;
 }
 
+.profileHeaderFriends {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .profileHome header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .profileHomeFriendsWrapper {
@@ -66,8 +91,8 @@
 .profileHomeFriendsList {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-auto-rows: 150px;
   gap: 10px;
 }
 
@@ -76,23 +101,27 @@
   grid-template-rows: 1fr auto;
 }
 
-.friendsContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-auto-rows: 250px;
-  gap: 15px;
-}
-
-.friendsContainer .friend {
-  display: grid;
-  grid-template-rows: 2fr auto auto;
-}
-
 .profileHomePosts > div:nth-child(1) {
   height: 70px;
-  padding: 10px 20px;
+  padding: 10px 50px;
   display: flex;
   align-items: center;
+}
+
+.emptyPostsIndicator {
+  display: flex;
+  justify-content: center;
+}
+
+.changePhotoBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  padding: 5px;
+}
+
+.bioOpenBtn {
+  margin: 50px;
 }
 
 .friend button {
@@ -100,8 +129,22 @@
   margin: 10px;
 }
 
+.profileNameWrapper h2 {
+  margin-top: auto;
+  padding: 5px 0px;
+}
+
 .friend p {
   padding: 10px;
+}
+
+.profileAbout p {
+  max-width: 600px;
+  text-align: center;
+}
+
+.friend a {
+  margin: 0px 5px;
 }
 
 .profilePageHeader a {
@@ -109,6 +152,34 @@
 }
 
 .profileHeaderOne img {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
+}
+
+.friend img {
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1080px) {
+  .profilePageHeader {
+    justify-items: center;
+  }
+
+  .profileHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profileHomeFriends,
+  .profileHomePosts {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* .profileMain .friendsList */
 }

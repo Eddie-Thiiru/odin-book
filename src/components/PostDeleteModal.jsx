@@ -2,6 +2,8 @@ import { useContext } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
+import("../stylesheets/deletePostModal.css");
+
 const styles = {
   content: {
     top: "50%",

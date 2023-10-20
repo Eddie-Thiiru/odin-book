@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
+import("../stylesheets/bioModal.css");
+
 const styles = {
   content: {
     top: "50%",

@@ -12,6 +12,18 @@ const CommentSection = ({
   handleCommentDelete,
   commentError,
 }) => {
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
   return (
     <div className="commentsSection">
       <div className="commentFormContainer">
@@ -40,20 +52,35 @@ const CommentSection = ({
           comments.map((obj, index) => {
             return (
               <div className="comment" key={index}>
-                <img src="" alt="" />
-                <div className="commentUserWrapper">
-                  <a
-                    href={`/profile/${obj.author._id}`}
-                  >{`${obj.author.firstName} ${obj.author.lastName}`}</a>
-                  <p>{obj.timestamp}</p>
-                  {obj.author._id === user.id && (
-                    <a href="#" onClick={handleCommentDelete}>
-                      delete
-                    </a>
+                <div className="commentProfileContainer">
+                  {obj.author.profilePicture !== undefined ? (
+                    <img
+                      src={`data:image/png;base64,${arrayBufferToBase64(
+                        obj.author.profilePicture.data
+                      )}`}
+                      alt=""
+                    />
+                  ) : (
+                    <img src="" alt="" />
                   )}
                 </div>
-                <div className="commentContent">
-                  <p>{obj.text}</p>
+                <div className="commentMain">
+                  <div className="commentUserWrapper">
+                    <div>
+                      <a
+                        href={`/profile/${obj.author._id}`}
+                      >{`${obj.author.firstName} ${obj.author.lastName}`}</a>
+                      <p>{obj.timestamp}</p>
+                    </div>
+                    {obj.author._id === user.id && (
+                      <a href="#" onClick={handleCommentDelete}>
+                        delete
+                      </a>
+                    )}
+                  </div>
+                  <div className="commentContent">
+                    <p>{obj.text}</p>
+                  </div>
                 </div>
               </div>
             );
@@ -254,17 +281,33 @@ const Post = ({ data }) => {
 
   const { author, text, photo, comments, likes, timestamp } = data;
 
-  let base64String = "";
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
 
-  if (photo !== undefined) {
-    const arrayBuffer = photo.data;
-    base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-  }
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
 
   return (
     <div className="post">
       <header className="postHeader">
-        <img src="" alt="" />
+        <div className="postProfileContainer">
+          {author.profilePicture !== undefined ? (
+            <img
+              src={`data:image/png;base64,${arrayBufferToBase64(
+                author.profilePicture.data
+              )}`}
+              alt=""
+            />
+          ) : (
+            <img src="" alt="" />
+          )}
+        </div>
         <div className="postUserWrapper">
           <a
             href={`/profile/${author._id}`}
@@ -284,7 +327,12 @@ const Post = ({ data }) => {
       <div className="postContent">
         <p>{text}</p>
         {photo !== undefined && (
-          <img src={`data:image/png;base64,${base64String}`} alt="" />
+          <div className="postImageContainer">
+            <img
+              src={`data:image/png;base64,${arrayBufferToBase64(photo.data)}`}
+              alt=""
+            />
+          </div>
         )}
       </div>
       <PostFooter postLikes={likes} postComments={comments} postId={data._id} />

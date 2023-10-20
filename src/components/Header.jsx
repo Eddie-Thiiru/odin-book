@@ -1,17 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import "../stylesheets/header.css";
 
-const Header = () => {
-  const navigate = useNavigate();
-
-  const handleLogoutClick = () => {
-    localStorage.removeItem("token");
-
-    navigate("/login");
-  };
-
-  const user = JSON.parse(localStorage.getItem("user"));
+const Header = ({ toggleDropDown }) => {
   return (
     <header className="appHeader">
       <div className="siteBanner">
@@ -19,17 +11,17 @@ const Header = () => {
       </div>
       <nav className="headerNavOne">
         <Link to={"/"}>Home</Link>
+        <Link to={"/friends"}>Friends</Link>
       </nav>
-      <nav className="headerNavTwo">
-        <Link to={`/profile/${user.id}`}>
-          <img src="" alt="account" />
-        </Link>
-        <a href="" onClick={handleLogoutClick}>
-          Log out
-        </a>
-      </nav>
+      <div className="headerUserAccount" onClick={toggleDropDown}>
+        <img src="" alt="" />
+      </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  toggleDropDown: PropTypes.func,
 };
 
 export default Header;

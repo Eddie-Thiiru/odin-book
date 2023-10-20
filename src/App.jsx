@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Link } from "react-router-dom";
 import AppContext from "./components/utils/appContext";
 import Header from "./components/Header";
 import PostModal from "./components/PostModal";
 import BioModal from "./components/BioModal";
 import PhotoModal from "./components/PhotoModal";
+import PostDeleteModal from "./components/PostDeleteModal";
 
 import "./stylesheets/App.css";
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
+  const [headerDropDown, setHeaderDropDown] = useState(false);
   const [postModalOpen, setPostModalOpen] = useState(false);
   const [bioModalOpen, setBioModalOpen] = useState(false);
   const [photoModalOpen, setPhotoModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState({
+    active: false,
+    postId: "",
+  });
 
   const navigate = useNavigate();
 
@@ -82,11 +88,58 @@ const App = () => {
     setPhotoModalOpen(false);
   };
 
+  const openDeleteModal = (postId) => {
+    setDeleteModalOpen({ active: true, postId: postId });
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+  };
+
+  const toggleAccountDropDown = () => {
+    console.log("waht");
+    setHeaderDropDown(!headerDropDown);
+  };
+
+  const closeAccountDropDown = () => {
+    if (headerDropDown === true) {
+      setHeaderDropDown(false);
+    } else {
+      return;
+    }
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
+
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <div className="App">
-      {token !== null && <Header />}
+    <div className="App" onClick={closeAccountDropDown}>
+      {token !== null && (
+        <Header
+          toggleDropDown={toggleAccountDropDown}
+          closeDropDown={closeAccountDropDown}
+        />
+      )}
+      {headerDropDown === true && (
+        <div className="headerDropDown">
+          <nav className="navDropDown">
+            <Link to={`/profile/${user.id}`}>
+              <img src="" alt="" />
+              {`${user.firstName} ${user.lastName}`}
+            </Link>
+            <a href="" onClick={handleLogoutClick}>
+              <img src="" alt="" />
+              Log out
+            </a>
+          </nav>
+        </div>
+      )}
       <AppContext.Provider
         value={{
           loginStatus,
@@ -99,6 +152,9 @@ const App = () => {
           openPhotoModal,
           closePhotoModal,
           photoModalOpen,
+          openDeleteModal,
+          closeDeleteModal,
+          deleteModalOpen,
         }}
       >
         <Outlet />
@@ -107,6 +163,7 @@ const App = () => {
         <PostModal />
         <BioModal />
         <PhotoModal />
+        <PostDeleteModal />
       </AppContext.Provider>
     </div>
   );

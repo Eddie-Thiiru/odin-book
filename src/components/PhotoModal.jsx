@@ -2,6 +2,8 @@ import { useContext, useRef, useState } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
+import("../stylesheets/photoModal.css");
+
 const styles = {
   content: {
     top: "50%",
@@ -57,7 +59,7 @@ const PhotoModal = () => {
         }
         return response.json();
       })
-      .then((data) => {
+      .then(() => {
         reload();
       })
       .catch((err) => {
@@ -126,7 +128,7 @@ const PhotoModal = () => {
         onSubmit={handlePhotoSubmit}
       >
         <div className="photoModalFormGrp">
-          <label>
+          <label className="fileInputLabel">
             Upload photo
             <input
               ref={fileInput}
@@ -134,7 +136,7 @@ const PhotoModal = () => {
               id="profilePhotoInput"
               name="profilePhoto"
               accept="image/png, image/jpeg"
-              // style={{ opacity: 0 }}
+              hidden
             />
           </label>
           {error.hasError === true && (

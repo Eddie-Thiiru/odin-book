@@ -1,29 +1,56 @@
 .postsContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 .post {
+  border-radius: 10px;
+}
+
+.post,
+.postFooter,
+.commentsSection {
   background-color: white;
-  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .postHeader {
+  padding: 10px 20px;
   display: flex;
+  gap: 5px;
 }
 
 .postContent {
   min-height: 50px;
 }
 
-.postFooter {
+.postProfileContainer {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.commentProfileContainer {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.postImageContainer {
+  max-height: 500px;
+  padding: 10px 0px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+}
+
+.postFooter {
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
 .postFooterOne {
@@ -37,28 +64,33 @@
   align-items: center;
 }
 
-.commentsSection {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 .commentFormContainer,
-.commentsContainer,
-.comment {
-  display: flex;
-  gap: 10px;
-}
-
-.commentForm,
 .comment,
 .commentUserWrapper {
-  flex: 1;
+  display: flex;
+  gap: 10px;
 }
 
 .commentForm {
+  width: 100%;
   position: relative;
   display: flex;
+}
+
+.commentsContainer,
+.commentUserWrapper > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentsContainer {
+  gap: 10px;
+}
+
+.commentMain {
+  border-radius: 15px;
+  background-color: aqua;
+  padding: 5px;
 }
 
 .submitCommentBtn {
@@ -75,6 +107,36 @@
   width: 100%;
 }
 
-.postMenuBtn {
+.postDeleteBtn {
   margin-left: auto;
+}
+
+.postContent p {
+  padding: 0px 20px;
+}
+
+.postUserWrapper p {
+  padding: 5px;
+}
+
+.comment p,
+.comment a {
+  padding: 2px 5px;
+}
+
+.commentUserWrapper a:nth-child(2) {
+  margin-left: auto;
+}
+
+.postHeader img,
+.comment img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.postImageContainer img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
 }

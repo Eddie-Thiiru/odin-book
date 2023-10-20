@@ -1,10 +1,27 @@
 .friendsPage {
+  height: 100%;
+  position: relative;
   display: grid;
   grid-template-columns: minmax(250px, 400px) 1fr;
 }
 
+.friendsSidebar {
+  width: 100%;
+  position: fixed;
+  top: 80px;
+  left: 10px;
+}
+
+.friendsList {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
 .friendsPageMain {
-  min-width: 680px;
+  grid-column: 2 / 3;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -20,9 +37,21 @@
 .suggestionsContainer {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
   grid-auto-rows: 300px;
   gap: 10px;
+}
+
+.friendsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+  grid-auto-rows: 250px;
+  gap: 15px;
+}
+
+.friendsContainer .friend {
+  display: grid;
+  grid-template-rows: 2fr auto auto;
 }
 
 .userRequest {
@@ -41,6 +70,79 @@
   height: 40px;
 }
 
-.userRequest p {
+.userRequest a {
   padding: 10px;
+}
+
+.sidebarGrp img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.userRequest img {
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1080px) {
+  .friendsPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .friendsPageMain {
+    width: 100%;
+  }
+
+  .friendsSidebar {
+    width: max-content;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: 15px;
+  }
+
+  .friendsList {
+    align-items: center;
+  }
+
+  .sidebarGrp {
+    padding: 5px;
+  }
+
+  .sidebarGrp:nth-child(1) {
+    display: none;
+  }
+
+  .requestsSection,
+  .suggestionsSection {
+    padding: 20px;
+    align-items: center;
+  }
+
+  .requestsContainer,
+  .suggestionsContainer,
+  .friendsContainer {
+    max-width: 650px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+    grid-auto-rows: 300px;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .emptyRequestsIndicator {
+    display: flex;
+    justify-content: center;
+  }
+
+  .sidebarGrp p {
+    display: none;
+  }
 }

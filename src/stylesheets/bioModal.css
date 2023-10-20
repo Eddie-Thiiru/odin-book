@@ -1,0 +1,36 @@
+#bioModal {
+  width: 350px;
+}
+
+.bioModalHeader {
+  padding: 10px 0px;
+  display: flex;
+}
+
+.bioModalForm {
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bioModalFormGrp {
+  display: flex;
+  gap: 15px;
+}
+
+.bioModalFormGrp button {
+  flex: 1;
+  height: 40px;
+  padding: 5px;
+}
+
+.bioModalFormGrp label {
+  width: 100%;
+  display: flex;
+}
+
+.bioModalFormGrp textarea {
+  width: 100%;
+  resize: none;
+}

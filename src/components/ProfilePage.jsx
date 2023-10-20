@@ -79,7 +79,9 @@ const ProfileHomePosts = ({ id }) => {
               return <Post data={userPost} key={index} />;
             })
           : loading === false && (
-              <div className="emptyPostsIndicator">No posts</div>
+              <div className="emptyPostsIndicator">
+                <p>No posts</p>
+              </div>
             )}
       </div>
     </div>
@@ -120,6 +122,18 @@ const ProfileHomeFriends = ({ id }) => {
     navigate(`/profile/${id}`);
   };
 
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
   return (
     <div className="profileHomeFriends">
       <div className="profileHomeFriendsWrapper">
@@ -139,11 +153,22 @@ const ProfileHomeFriends = ({ id }) => {
             ? friends.map((friend, index) => {
                 return (
                   <div key={index} className="friend">
-                    <img
-                      src=""
-                      alt=""
-                      onClick={() => navigateToProfile(friend._id)}
-                    />
+                    {friend.profilePicture === undefined ? (
+                      <img
+                        src=""
+                        alt=""
+                        onClick={() => navigateToProfile(friend._id)}
+                      />
+                    ) : (
+                      <img
+                        src={`data:image/png;base64,${arrayBufferToBase64(
+                          friend.profilePicture.data
+                        )}`}
+                        alt=""
+                        onClick={() => navigateToProfile(friend._id)}
+                      />
+                    )}
+
                     <a
                       href={`/profile/${friend._id}`}
                     >{`${friend.firstName} ${friend.lastName}`}</a>
@@ -151,7 +176,9 @@ const ProfileHomeFriends = ({ id }) => {
                 );
               })
             : loading === false && (
-                <div className="emptyFriendsIndicator">No friends</div>
+                <div className="emptyFriendsIndicator">
+                  <p>No friends</p>
+                </div>
               )}
         </div>
       </div>
@@ -183,10 +210,7 @@ const Profile = () => {
       })
       .then((data) => {
         if (data.profilePicture !== undefined) {
-          const arrayBuffer = data.profilePicture.data;
-          const base64String = btoa(
-            String.fromCharCode(...new Uint8Array(arrayBuffer))
-          );
+          const base64String = arrayBufferToBase64(data.profilePicture.data);
 
           setProfileImage(base64String);
         }
@@ -199,6 +223,18 @@ const Profile = () => {
       });
   }, [id]);
 
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
   const userToken = JSON.parse(localStorage.getItem("user"));
 
   return (
@@ -207,8 +243,13 @@ const Profile = () => {
         <>
           <header className="profilePageHeader">
             <div className="profileHeaderOne">
-              <div className="profilePhotWrapper">
-                <img src={`data:image/png;base64,${profileImage}`} alt="" />
+              <div className="profilePhotoWrapper">
+                {profileImage === "" ? (
+                  <img src="" alt="" />
+                ) : (
+                  <img src={`data:image/png;base64,${profileImage}`} alt="" />
+                )}
+
                 {userToken.id === user._id && (
                   <button
                     type="button"

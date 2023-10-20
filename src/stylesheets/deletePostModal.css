@@ -1,0 +1,26 @@
+#postDeleteModal {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bioModalFormGrp {
+  display: flex;
+  gap: 20px;
+}
+
+#postDeleteModal > div {
+  display: flex;
+  gap: 15px;
+}
+
+#postDeleteModal button {
+  flex: 1;
+  height: 40px;
+  padding: 5px;
+}
+
+.confirmDeletePostBtn {
+  background-color: red;
+}

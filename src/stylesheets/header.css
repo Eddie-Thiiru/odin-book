@@ -1,6 +1,20 @@
 .appHeader {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: aliceblue;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.headerUserAccount img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: grey;
 }

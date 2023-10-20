@@ -60,6 +60,18 @@ const Suggestions = () => {
     navigate(`/profile/${id}`);
   };
 
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
   return (
     <section className="suggestionsSection">
       <h2>People You May Know</h2>
@@ -68,11 +80,21 @@ const Suggestions = () => {
           ? suggestions.map((user, index) => {
               return (
                 <div key={index} className="userRequest">
-                  <img
-                    src=""
-                    alt=""
-                    onClick={() => navigateToProfile(user._id)}
-                  />
+                  {user.profilePicture === undefined ? (
+                    <img
+                      src=""
+                      alt=""
+                      onClick={() => navigateToProfile(user._id)}
+                    />
+                  ) : (
+                    <img
+                      src={`data:image/png;base64,${arrayBufferToBase64(
+                        user.profilePicture.data
+                      )}`}
+                      alt=""
+                      onClick={() => navigateToProfile(user._id)}
+                    />
+                  )}
                   <a
                     href={`/profile/${user._id}`}
                   >{`${user.firstName} ${user.lastName}`}</a>
@@ -172,6 +194,18 @@ const Requests = () => {
     navigate(`/profile/${id}`);
   };
 
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
   return (
     <section className="requestsSection">
       <h2>Friend Requests</h2>
@@ -180,11 +214,21 @@ const Requests = () => {
           ? requests.map((user, index) => {
               return (
                 <div key={index} className="userRequest">
-                  <img
-                    src=""
-                    alt=""
-                    onClick={() => navigateToProfile(user._id)}
-                  />
+                  {user.profilePicture === undefined ? (
+                    <img
+                      src=""
+                      alt=""
+                      onClick={() => navigateToProfile(user._id)}
+                    />
+                  ) : (
+                    <img
+                      src={`data:image/png;base64,${arrayBufferToBase64(
+                        user.profilePicture.data
+                      )}`}
+                      alt=""
+                      onClick={() => navigateToProfile(user._id)}
+                    />
+                  )}
                   <a
                     href={`/profile/${user._id}`}
                   >{`${user.firstName} ${user.lastName}`}</a>
@@ -208,7 +252,9 @@ const Requests = () => {
               );
             })
           : loading === false && (
-              <div className="emptyRequestsIndicator">No requests</div>
+              <div className="emptyRequestsIndicator">
+                <p>No requests</p>
+              </div>
             )}
       </div>
     </section>

@@ -1,4 +1,5 @@
 .loginPage {
+  width: 100%;
   padding: 50px;
   gap: 20px;
 }
@@ -11,6 +12,12 @@
   gap: 20px;
 }
 
+.loginWrapper {
+  border-radius: 10px;
+  background-color: blanchedalmond;
+  padding: 20px 5px;
+}
+
 .loginForm {
   width: 400px;
   display: flex;
@@ -19,7 +26,7 @@
 }
 
 .loginFormGrp {
-  padding: 10px 20px;
+  padding: 5px 20px;
   display: flex;
 }
 
@@ -28,6 +35,15 @@
   width: 100%;
 }
 
-.loginForm button {
+.loginBtn {
+  margin: 10px 20px 0px 20px;
+}
+
+.loginFacebookBtn {
   margin: 0px 20px;
+}
+
+.loginDemoBtn {
+  background-color: #00a400;
+  margin-top: 15px;
 }

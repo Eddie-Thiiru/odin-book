@@ -1,7 +1,24 @@
 .App {
   width: 100%;
-  display: grid;
-  grid-template-rows: 60px 1fr;
+  position: relative;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerDropDown {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  z-index: 1;
+  border-radius: 5px;
+  padding: 15px 10px;
+  background-color: aquamarine;
+}
+
+.navDropDown {
+  display: flex;
+  flex-direction: column;
 }
 
 .homepage,
@@ -31,6 +48,9 @@
 
 input {
   height: 50px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 5px 15px;
 }
 
 textarea {
@@ -39,11 +59,45 @@ textarea {
 
 button {
   height: 45px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #1877f2;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+}
+
+h2 {
+  padding: 15px 0px;
+}
+
+p {
+  padding: 5px 0px;
+  word-break: break-all;
 }
 
 a {
   color: #1877f2;
   text-decoration: none;
+  padding: 5px;
+  word-break: break-all;
+}
+
+.navDropDown a {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.navDropDown img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: grey;
 }
 
 a:hover {

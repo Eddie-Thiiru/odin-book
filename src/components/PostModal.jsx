@@ -29,6 +29,7 @@ const PostModal = () => {
   });
   const { closeNewPostModal, postModalOpen } = useContext(AppContext);
   const fileInput = useRef();
+  const textInput = useRef();
 
   const reload = () => {
     window.location.reload();
@@ -37,7 +38,7 @@ const PostModal = () => {
   const handlePostSubmit = (e) => {
     e.preventDefault();
 
-    if (photo.src === "") {
+    if (textInput.current.value === "" && photo.src === "") {
       return;
     }
 
@@ -132,6 +133,7 @@ const PostModal = () => {
         <div className="postModalFormGrp">
           <label>
             <textarea
+              ref={textInput}
               id="postTextInput"
               name="text"
               placeholder="What's on your mind?"
@@ -145,8 +147,8 @@ const PostModal = () => {
           )}
         </div>
         <div className="postModalFormGrp">
-          <label>
-            Add Photos
+          <label className="fileInputLabel">
+            + Add Photo
             <input
               ref={fileInput}
               type="file"
@@ -154,6 +156,7 @@ const PostModal = () => {
               name="postPhoto"
               accept="image/png, image/jpeg"
               onChange={updateImageDisplay}
+              hidden
             />
           </label>
           {photo.error === true && (
