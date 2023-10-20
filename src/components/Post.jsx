@@ -250,35 +250,11 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 };
 
 const Post = ({ data }) => {
-  const [menu, setMenu] = useState(false);
-  const { refreshPage } = useContext(AppContext);
-
-  let base64String = "";
-
-  const toggleMenu = () => {
-    setMenu(!menu);
-  };
-
-  const handlePostDelete = () => {
-    fetch(`http://localhost:3000/post/${data._id}`, {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject(response);
-        }
-        return response.json();
-      })
-      .then(() => {
-        refreshPage();
-      })
-      .catch((err) => {
-        console.log(err.statusText);
-      });
-  };
+  const { openDeleteModal } = useContext(AppContext);
 
   const { author, text, photo, comments, likes, timestamp } = data;
+
+  let base64String = "";
 
   if (photo !== undefined) {
     const arrayBuffer = photo.data;
@@ -296,22 +272,15 @@ const Post = ({ data }) => {
           <p>{timestamp}</p>
         </div>
         {user.id === author._id && (
-          <button type="button" className="postMenuBtn" onClick={toggleMenu}>
-            menu
+          <button
+            type="button"
+            className="postDeleteBtn"
+            onClick={() => openDeleteModal(data._id)}
+          >
+            Delete
           </button>
         )}
       </header>
-      {menu === true && (
-        <div className="menuDropDowncontainer">
-          <button
-            type="button"
-            className="deletePostBtn"
-            onClick={handlePostDelete}
-          >
-            Delete Post
-          </button>
-        </div>
-      )}
       <div className="postContent">
         <p>{text}</p>
         {photo !== undefined && (
