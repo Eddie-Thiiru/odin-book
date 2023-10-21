@@ -41,6 +41,7 @@
 .sidebarGrp {
   border-radius: 5px;
   background-color: gray;
+  gap: 10px;
 }
 
 .sidebarGrp img,

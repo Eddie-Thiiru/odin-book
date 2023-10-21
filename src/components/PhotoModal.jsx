@@ -2,6 +2,9 @@ import { useContext, useRef, useState } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
+import { GrAdd } from "react-icons/gr";
+import { RxCross2 } from "react-icons/rx";
+
 import("../stylesheets/photoModal.css");
 
 const styles = {
@@ -117,10 +120,9 @@ const PhotoModal = () => {
     <Modal id="photoModal" style={styles} isOpen={photoModalOpen}>
       <header className="photoModalHeader">
         <h3>Choose profile picture</h3>
-        <button
-          className="closePhotoModalBtn"
-          onClick={closePhotoModal}
-        ></button>
+        <button className="closePhotoModalBtn" onClick={closePhotoModal}>
+          <RxCross2 />
+        </button>
       </header>
       <form
         className="photoModalForm"
@@ -129,7 +131,10 @@ const PhotoModal = () => {
       >
         <div className="photoModalFormGrp">
           <label className="fileInputLabel">
-            Upload photo
+            <p>
+              <GrAdd />
+              Upload Photo
+            </p>
             <input
               ref={fileInput}
               type="file"

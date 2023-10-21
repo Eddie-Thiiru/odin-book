@@ -12,9 +12,43 @@
   align-items: center;
 }
 
-.headerUserAccount img {
-  height: 35px;
-  width: 35px;
+.headerNavOne {
+  display: flex;
+}
+
+.headerUserAccount {
+  cursor: pointer;
+}
+
+.headerUserAccount > div {
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerNavOne a {
+  border-radius: 5px;
+  padding: 5px 15px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.headerNavOne img {
+  height: 30px;
+  width: 30px;
+}
+
+.headerUserAccount img {
+  height: 30px;
+  width: 30px;
+}
+
+.headerNavOne a:hover {
+  background-color: gray;
 }

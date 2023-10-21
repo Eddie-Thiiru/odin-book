@@ -1,9 +1,12 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import AppContext from "./utils/appContext";
-import "../stylesheets/post.css";
 
-const user = JSON.parse(localStorage.getItem("user"));
+import { AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa";
+import { BiSolidSend } from "react-icons/bi";
+import personImg from "../images/person.svg";
+import "../stylesheets/post.css";
 
 const CommentSection = ({
   loading,
@@ -12,6 +15,8 @@ const CommentSection = ({
   handleCommentDelete,
   commentError,
 }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
     let bytes = new Uint8Array(buffer);
@@ -27,7 +32,6 @@ const CommentSection = ({
   return (
     <div className="commentsSection">
       <div className="commentFormContainer">
-        <img src="" alt="" />
         <form className="commentForm" onSubmit={handleCommentSubmit}>
           <label>
             <input
@@ -38,7 +42,7 @@ const CommentSection = ({
             />
           </label>
           <button type="submit" className="submitCommentBtn">
-            Add
+            <BiSolidSend />
           </button>
         </form>
         {commentError.hasError === true && (
@@ -61,7 +65,7 @@ const CommentSection = ({
                       alt=""
                     />
                   ) : (
-                    <img src="" alt="" />
+                    <img src={personImg} alt="" />
                   )}
                 </div>
                 <div className="commentMain">
@@ -124,6 +128,8 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         console.log(err);
       });
   };
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handlePostLike = () => {
     const obj = { userId: user.id };
@@ -250,6 +256,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         </div>
         <div>
           <button type="button" className="likeBtn" onClick={handlePostLike}>
+            <AiOutlineLike />
             {likes.includes(`${user.id}`) ? "liked" : "like"}
           </button>
           <button
@@ -259,6 +266,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
               openCommentsSection(), fetchCommentsData();
             }}
           >
+            <FaRegComment />
             Comment
           </button>
         </div>
@@ -280,6 +288,8 @@ const Post = ({ data }) => {
   const { openDeleteModal } = useContext(AppContext);
 
   const { author, text, photo, comments, likes, timestamp } = data;
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
@@ -305,7 +315,7 @@ const Post = ({ data }) => {
               alt=""
             />
           ) : (
-            <img src="" alt="" />
+            <img src={personImg} alt="" />
           )}
         </div>
         <div className="postUserWrapper">
@@ -320,7 +330,7 @@ const Post = ({ data }) => {
             className="postDeleteBtn"
             onClick={() => openDeleteModal(data._id)}
           >
-            Delete
+            <AiOutlineDelete />
           </button>
         )}
       </header>

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FriendsList from "./FriendsList";
+
+import groupImg from "../images/friends-group.svg";
+import allFriendsImg from "../images/all-friends.svg";
+import addFriendImg from "../images/person-add.svg";
+import personImg from "../images/person.svg";
 import "../stylesheets/friendsPage.css";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -82,7 +87,7 @@ const Suggestions = () => {
                 <div key={index} className="userRequest">
                   {user.profilePicture === undefined ? (
                     <img
-                      src=""
+                      src={personImg}
                       alt=""
                       onClick={() => navigateToProfile(user._id)}
                     />
@@ -111,7 +116,9 @@ const Suggestions = () => {
               );
             })
           : loading === false && (
-              <div className="emptySuggestionsIndicator">No suggestions</div>
+              <div className="emptySuggestionsIndicator">
+                No suggestions available
+              </div>
             )}
       </div>
     </section>
@@ -216,7 +223,7 @@ const Requests = () => {
                 <div key={index} className="userRequest">
                   {user.profilePicture === undefined ? (
                     <img
-                      src=""
+                      src={personImg}
                       alt=""
                       onClick={() => navigateToProfile(user._id)}
                     />
@@ -253,7 +260,7 @@ const Requests = () => {
             })
           : loading === false && (
               <div className="emptyRequestsIndicator">
-                <p>No requests</p>
+                <p>No requests available</p>
               </div>
             )}
       </div>
@@ -273,28 +280,28 @@ const FriendsPage = () => {
     <div className="friendsPage">
       <div className="friendsSidebar">
         <div className="sidebarGrp" onClick={() => handleNavigation("friends")}>
-          <img src="" alt="" />
+          <img src={groupImg} alt="" />
           <p>Home</p>
         </div>
         <div
           className="sidebarGrp"
           onClick={() => handleNavigation("friends/requests")}
         >
-          <img src="" alt="" />
+          <img src={addFriendImg} alt="" />
           <p>Friend Requests</p>
         </div>
         <div
           className="sidebarGrp"
           onClick={() => handleNavigation("friends/suggestions")}
         >
-          <img src="" alt="" />
+          <img src={addFriendImg} alt="" />
           <p>Suggestions</p>
         </div>
         <div
           className="sidebarGrp"
           onClick={() => handleNavigation("friends/friends")}
         >
-          <img src="" alt="" />
+          <img src={allFriendsImg} alt="" />
           <p>All friends</p>
         </div>
       </div>

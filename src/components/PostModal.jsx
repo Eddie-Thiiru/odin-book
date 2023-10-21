@@ -2,6 +2,8 @@ import { useContext, useRef, useState } from "react";
 import Modal from "react-modal";
 import AppContext from "./utils/appContext";
 
+import { GrAdd } from "react-icons/gr";
+import { RxCross2 } from "react-icons/rx";
 import("../stylesheets/postModal.css");
 
 const styles = {
@@ -118,16 +120,11 @@ const PostModal = () => {
 
   return (
     <Modal id="postModal" style={styles} isOpen={postModalOpen}>
-      <header className="postModalHeaderOne">
+      <header className="postModalHeader">
         <h3>Create post</h3>
-        <button
-          className="closePostModalBtn"
-          onClick={closeNewPostModal}
-        ></button>
-      </header>
-      <header className="postModalHeaderTwo">
-        <img src="" alt="" />
-        <p>Example user</p>
+        <button className="closePostModalBtn" onClick={closeNewPostModal}>
+          <RxCross2 />
+        </button>
       </header>
       <form className="postModalForm" onSubmit={handlePostSubmit}>
         <div className="postModalFormGrp">
@@ -148,7 +145,10 @@ const PostModal = () => {
         </div>
         <div className="postModalFormGrp">
           <label className="fileInputLabel">
-            + Add Photo
+            <p>
+              <GrAdd />
+              Add Photo
+            </p>
             <input
               ref={fileInput}
               type="file"

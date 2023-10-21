@@ -20,6 +20,7 @@
 .postHeader {
   padding: 10px 20px;
   display: flex;
+  align-items: center;
   gap: 5px;
 }
 
@@ -93,22 +94,34 @@
   padding: 5px;
 }
 
-.submitCommentBtn {
-  position: absolute;
-  height: 35px;
-  width: 35px;
-  right: 5px;
-  bottom: 5px;
-  padding: 5px;
-}
-
 .commentForm label,
 .commentForm input {
   width: 100%;
 }
 
+.likeBtn,
+.commentBtn {
+  grid-template-columns: max-content 1fr;
+  gap: 8px;
+}
+
+.submitCommentBtn {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 5px;
+  bottom: 5px;
+  background-color: white;
+  padding: 0px;
+}
+
 .postDeleteBtn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  background-color: gray;
   margin-left: auto;
+  padding: 5px;
 }
 
 .postContent p {
@@ -139,4 +152,22 @@
   max-height: 100%;
   max-width: 100%;
   object-fit: cover;
+}
+
+.likeBtn svg,
+.commentBtn svg {
+  height: 20px;
+  width: 20px;
+}
+
+.postDeleteBtn svg {
+  height: 20px;
+  width: 20px;
+  fill: black;
+}
+
+.submitCommentBtn svg {
+  height: 15px;
+  width: 15px;
+  fill: black;
 }

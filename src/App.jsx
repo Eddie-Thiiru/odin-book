@@ -7,7 +7,11 @@ import BioModal from "./components/BioModal";
 import PhotoModal from "./components/PhotoModal";
 import PostDeleteModal from "./components/PostDeleteModal";
 
+import personImg from "./images/person.svg";
+import logoutImg from "./images/logout.svg";
 import "./stylesheets/App.css";
+
+let profileImage = "";
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -43,6 +47,13 @@ const App = () => {
       .then((data) => {
         if (data.message === "Authenticated") {
           setLoginStatus(true);
+        } else {
+          // Delete local token and user
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+
+          setLoginStatus(false);
+          navigate("/login");
         }
       })
       .catch((err) => {
@@ -97,7 +108,6 @@ const App = () => {
   };
 
   const toggleAccountDropDown = () => {
-    console.log("waht");
     setHeaderDropDown(!headerDropDown);
   };
 
@@ -111,30 +121,57 @@ const App = () => {
 
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
     navigate("/login");
   };
 
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    profileImage = window.btoa(binary);
+  };
+
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user) {
+    if (user.profilePicture !== undefined) {
+      arrayBufferToBase64(user.profilePicture.data);
+    }
+  }
 
   return (
     <div className="App" onClick={closeAccountDropDown}>
       {token !== null && (
         <Header
           toggleDropDown={toggleAccountDropDown}
-          closeDropDown={closeAccountDropDown}
+          profileImage={profileImage}
         />
       )}
       {headerDropDown === true && (
         <div className="headerDropDown">
           <nav className="navDropDown">
             <Link to={`/profile/${user.id}`}>
-              <img src="" alt="" />
+              <div>
+                {profileImage === "" ? (
+                  <img src={personImg} alt="" />
+                ) : (
+                  <img src={`data:image/png;base64,${profileImage}`} alt="" />
+                )}
+              </div>
               {`${user.firstName} ${user.lastName}`}
             </Link>
             <a href="" onClick={handleLogoutClick}>
-              <img src="" alt="" />
+              <div>
+                <img src={logoutImg} alt="" />
+              </div>
               Log out
             </a>
           </nav>
@@ -155,6 +192,7 @@ const App = () => {
           openDeleteModal,
           closeDeleteModal,
           deleteModalOpen,
+          profileImage,
         }}
       >
         <Outlet />

@@ -5,6 +5,9 @@ import AppContext from "./utils/appContext";
 import Post from "./Post";
 import FriendsList from "./FriendsList";
 
+import { BsCameraFill } from "react-icons/bs";
+import { MdEdit } from "react-icons/md";
+import personImg from "../images/person.svg";
 import("../stylesheets/profilePage.css");
 
 const About = ({ bio, userId }) => {
@@ -21,6 +24,7 @@ const About = ({ bio, userId }) => {
       )}
       {user.id === userId && (
         <button type="button" className="bioOpenBtn" onClick={openBioModal}>
+          <MdEdit />
           Edit bio
         </button>
       )}
@@ -62,7 +66,6 @@ const ProfileHomePosts = ({ id }) => {
   return (
     <div className="profileHomePosts">
       <div>
-        <img src="" alt="" />
         {userToken.id === id && (
           <button
             type="button"
@@ -155,7 +158,7 @@ const ProfileHomeFriends = ({ id }) => {
                   <div key={index} className="friend">
                     {friend.profilePicture === undefined ? (
                       <img
-                        src=""
+                        src={personImg}
                         alt=""
                         onClick={() => navigateToProfile(friend._id)}
                       />
@@ -177,7 +180,7 @@ const ProfileHomeFriends = ({ id }) => {
               })
             : loading === false && (
                 <div className="emptyFriendsIndicator">
-                  <p>No friends</p>
+                  <p>No friends available</p>
                 </div>
               )}
         </div>
@@ -245,7 +248,7 @@ const Profile = () => {
             <div className="profileHeaderOne">
               <div className="profilePhotoWrapper">
                 {profileImage === "" ? (
-                  <img src="" alt="" />
+                  <img src={personImg} alt="" />
                 ) : (
                   <img src={`data:image/png;base64,${profileImage}`} alt="" />
                 )}
@@ -256,7 +259,7 @@ const Profile = () => {
                     className="changePhotoBtn"
                     onClick={openPhotoModal}
                   >
-                    change
+                    <BsCameraFill />
                   </button>
                 )}
               </div>

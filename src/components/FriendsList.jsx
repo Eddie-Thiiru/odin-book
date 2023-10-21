@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
+import personImg from "../images/person.svg";
+
 const FriendsList = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [friends, setFriends] = useState();
@@ -79,7 +81,7 @@ const FriendsList = ({ id }) => {
                 <div key={index} className="friend">
                   {friend.profilePicture === undefined ? (
                     <img
-                      src=""
+                      src={personImg}
                       alt=""
                       onClick={() => navigateToProfile(friend._id)}
                     />
@@ -106,7 +108,7 @@ const FriendsList = ({ id }) => {
               );
             })
           : loading === false && (
-              <div className="emptyFriendsIndicator">No friends</div>
+              <div className="emptyFriendsIndicator">No friends available</div>
             )}
       </div>
     </section>

@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import AppContext from "./utils/appContext";
 import Post from "./Post";
 
+import personImg from "../images/person.svg";
+import groupColorImg from "../images/friends-group-color.svg";
 import "../stylesheets/homepage.css";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { openNewPostModal } = useContext(AppContext);
+  const { openNewPostModal, profileImage } = useContext(AppContext);
   const navigate = useNavigate();
 
   // Fetch all posts on component mount
@@ -53,20 +55,23 @@ const Home = () => {
             className="sidebarGrp"
             onClick={() => handleNavigation("profile")}
           >
-            <img src="" alt="" />
+            {profileImage === "" ? (
+              <img src={personImg} alt="" />
+            ) : (
+              <img src={`data:image/png;base64,${profileImage}`} alt="" />
+            )}
             <p>{`${user.firstName} ${user.lastName}`}</p>
           </div>
           <div
             className="sidebarGrp"
             onClick={() => handleNavigation("friends")}
           >
-            <img src="" alt="" />
+            <img src={groupColorImg} alt="" />
             <p>Friends</p>
           </div>
         </div>
         <div className="homepageMain">
           <div className="homepageHeader">
-            <img src="" alt="" />
             <button
               type="button"
               className="homeCreateBtn"
