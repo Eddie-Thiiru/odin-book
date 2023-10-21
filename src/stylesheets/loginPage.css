@@ -14,7 +14,7 @@
 
 .loginWrapper {
   border-radius: 10px;
-  background-color: blanchedalmond;
+  background-color: #d9d9d9;
   padding: 20px 5px;
 }
 
@@ -28,6 +28,11 @@
 .loginFormGrp {
   padding: 5px 20px;
   display: flex;
+}
+
+.loginPage h1 {
+  font-size: 2.5rem;
+  color: #1877f2;
 }
 
 .loginFormGrp label,
@@ -46,4 +51,8 @@
 .loginDemoBtn {
   background-color: #00a400;
   margin-top: 15px;
+}
+
+.loginDemoBtn:hover {
+  background-color: #00be00;
 }

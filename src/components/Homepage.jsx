@@ -55,11 +55,13 @@ const Home = () => {
             className="sidebarGrp"
             onClick={() => handleNavigation("profile")}
           >
-            {profileImage === "" ? (
-              <img src={personImg} alt="" />
-            ) : (
-              <img src={`data:image/png;base64,${profileImage}`} alt="" />
-            )}
+            <div className="sidebarProfileContainer">
+              {profileImage === "" ? (
+                <img src={personImg} alt="" />
+              ) : (
+                <img src={`data:image/png;base64,${profileImage}`} alt="" />
+              )}
+            </div>
             <p>{`${user.firstName} ${user.lastName}`}</p>
           </div>
           <div

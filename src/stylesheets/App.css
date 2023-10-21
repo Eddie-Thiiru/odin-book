@@ -25,7 +25,7 @@
   height: 35px;
   width: 35px;
   border-radius: 50%;
-  background-color: grey;
+  background-color: #d9d9d9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,24 +51,24 @@
   cursor: pointer;
 }
 
-.sidebarGrp img,
-.sidebarGrp p {
-  pointer-events: none;
-}
-
 input {
   height: 50px;
-  border: 1px solid grey;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
   padding: 5px 15px;
 }
 
 textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #d9d9d9;
   padding: 5px;
 }
 
 button {
-  height: 45px;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid transparent;
   font-size: 1em;
@@ -84,6 +84,7 @@ button {
 }
 
 h2 {
+  font-size: 1.375rem;
   padding: 15px 0px;
 }
 
@@ -106,35 +107,38 @@ a {
   align-items: center;
 }
 
+.sidebarGrp img,
+.sidebarGrp p {
+  pointer-events: none;
+}
+
 .navDropDown img {
   height: 20px;
   width: 20px;
+}
+
+.sidebarGrp img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+button:hover {
+  background-color: #3085f3;
+}
+
+.sidebarGrp:hover {
+  background-color: #cccccc;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
-
-/* button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+input:focus {
+  outline: 1px solid #60a2f6;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+textarea:focus {
+  outline: 1px solid #1877f2;
 }
-a:hover {
-  color: #535bf2;
-} */

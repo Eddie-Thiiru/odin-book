@@ -134,7 +134,7 @@ const PostModal = () => {
               id="postTextInput"
               name="text"
               placeholder="What's on your mind?"
-              rows={6}
+              rows={8}
               maxLength={3000}
               required
             />

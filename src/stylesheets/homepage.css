@@ -32,21 +32,31 @@
   align-items: center;
 }
 
-.homeCreateBtn {
-  height: 40px;
-  background-color: gray;
-  flex: 1;
-}
-
 .sidebarGrp {
   border-radius: 5px;
-  background-color: gray;
   gap: 10px;
 }
 
-.sidebarGrp img,
-.sidebarGrp p {
-  pointer-events: none;
+.sidebarProfileContainer {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #8ac8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeCreateBtn {
+  width: 100%;
+  font-weight: 600;
+  color: #4c4c4c;
+  background-color: #d9d9d9;
+}
+
+.sidebarProfileContainer img {
+  height: 35px;
+  width: 35px;
 }
 
 @media (max-width: 1080px) {
@@ -64,4 +74,8 @@
   .homeSidebar {
     display: none;
   }
+}
+
+.homeCreateBtn:hover {
+  background-color: #cccccc;
 }

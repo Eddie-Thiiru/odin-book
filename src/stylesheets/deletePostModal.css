@@ -22,5 +22,9 @@
 }
 
 .confirmDeletePostBtn {
-  background-color: red;
+  background-color: #ff3333;
+}
+
+.confirmDeletePostBtn:hover {
+  background-color: #ff1a1a;
 }

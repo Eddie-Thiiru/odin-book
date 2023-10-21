@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import { formatDistance } from "date-fns";
 import AppContext from "./utils/appContext";
 
 import { AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
@@ -74,7 +75,9 @@ const CommentSection = ({
                       <a
                         href={`/profile/${obj.author._id}`}
                       >{`${obj.author.firstName} ${obj.author.lastName}`}</a>
-                      <p>{obj.timestamp}</p>
+                      <p>
+                        {formatDistance(new Date(obj.timestamp), new Date())}
+                      </p>
                     </div>
                     {obj.author._id === user.id && (
                       <a href="#" onClick={handleCommentDelete}>
@@ -105,6 +108,8 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
     msg: "",
   });
 
+  let liked = false;
+
   const openCommentsSection = () => {
     setCommentsOpen(true);
   };
@@ -133,6 +138,13 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 
   const handlePostLike = () => {
     const obj = { userId: user.id };
+
+    // prevents multiple likes when the user clicks the like button rapidly
+    if (liked === true) {
+      return;
+    }
+
+    liked = true;
 
     if (likes.includes(user.id)) {
       // Remove user like from database
@@ -175,6 +187,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
           This saves a few seconds since the api wil not filter parent post 
           to send back likes array
         */
+          liked = false;
           setLikes([...comments, user.id]);
         })
         .catch((err) => {
@@ -257,7 +270,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         <div>
           <button type="button" className="likeBtn" onClick={handlePostLike}>
             <AiOutlineLike />
-            {likes.includes(`${user.id}`) ? "liked" : "like"}
+            {likes.includes(`${user.id}`) ? "Liked" : "Like"}
           </button>
           <button
             type="button"
@@ -322,7 +335,7 @@ const Post = ({ data }) => {
           <a
             href={`/profile/${author._id}`}
           >{`${author.firstName} ${author.lastName}`}</a>
-          <p>{timestamp}</p>
+          <p>{formatDistance(new Date(timestamp), new Date())}</p>
         </div>
         {user.id === author._id && (
           <button

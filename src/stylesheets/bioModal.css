@@ -25,12 +25,15 @@
   padding: 5px;
 }
 
+.addBioBtn {
+  background-color: #00a400;
+}
+
 .bioModalFormGrp label {
   width: 100%;
   display: flex;
 }
 
-.bioModalFormGrp textarea {
-  width: 100%;
-  resize: none;
+.addBioBtn:hover {
+  background-color: #00be00;
 }

@@ -3,8 +3,9 @@
 }
 
 .postModalHeader {
-  padding: 20px 0px;
+  padding: 10px 0px;
   display: flex;
+  align-items: center;
 }
 
 .postModalForm {
@@ -30,25 +31,21 @@
 .fileInputLabel {
   height: 50px;
   border-radius: 5px;
-  background-color: burlywood;
+  background-color: #d9d9d9;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .postModalFormGrp input {
   height: max-content;
 }
 
-.postModalFormGrp textarea {
-  resize: none;
-  border: 1px solid blue;
-}
-
 .closePostModalBtn {
   height: 30px;
   width: 30px;
   border-radius: 50px;
-  background-color: gray;
+  background-color: white;
   padding: 0px;
   margin-left: auto;
 }
@@ -72,4 +69,13 @@
 .closePostModalBtn svg {
   height: 20px;
   width: 20px;
+  color: black;
+}
+
+.closePostModalBtn:hover {
+  background-color: #cccccc;
+}
+
+.fileInputLabel:hover {
+  background-color: #cccccc;
 }

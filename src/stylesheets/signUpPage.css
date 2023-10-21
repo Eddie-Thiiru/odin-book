@@ -14,7 +14,7 @@
 
 .signUpWrapper {
   border-radius: 10px;
-  background-color: blanchedalmond;
+  background-color: #d9d9d9;
   padding: 20px 5px;
 }
 
@@ -33,6 +33,11 @@
   gap: 15px;
 }
 
+.signUpPage h1 {
+  font-size: 2.5rem;
+  color: #1877f2;
+}
+
 .signUpFormGrp label,
 .signUpFormGrp input {
   width: 100%;
@@ -42,4 +47,8 @@
   width: 200px;
   background-color: #00a400;
   margin: 15px 20px 0px 20px;
+}
+
+.signUpBtn:hover {
+  background-color: #00be00;
 }
