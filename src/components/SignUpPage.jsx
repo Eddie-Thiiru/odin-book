@@ -68,29 +68,31 @@ const SignUp = () => {
         <h2>Create a new account</h2>
         <form className="signUpForm" onSubmit={handleSubmit}>
           <div className="signUpFormGrp">
-            <label>
-              <input
-                id="firstNameInput"
-                type="text"
-                name="firstName"
-                placeholder="First name"
-                required
-              />
-            </label>
-            <label>
-              <input
-                id="lastNameInput"
-                type="text"
-                name="lastName"
-                placeholder="Last name"
-                required
-              />
-            </label>
+            <div>
+              <label>
+                <input
+                  id="firstNameInput"
+                  type="text"
+                  name="firstName"
+                  placeholder="First name"
+                  required
+                />
+              </label>
+              <label>
+                <input
+                  id="lastNameInput"
+                  type="text"
+                  name="lastName"
+                  placeholder="Last name"
+                  required
+                />
+              </label>
+            </div>
             {firstName.hasError === true && (
-              <span className="errorMsg">{firstName.msg}</span>
+              <span className="errorMsg">* {firstName.msg}</span>
             )}
             {lastName.hasError === true && (
-              <span className="errorMsg">{lastName.msg}</span>
+              <span className="errorMsg">* {lastName.msg}</span>
             )}
           </div>
           <div className="signUpFormGrp">
@@ -104,7 +106,7 @@ const SignUp = () => {
               />
             </label>
             {email.hasError === true && (
-              <span className="errorMsg">{email.msg}</span>
+              <span className="errorMsg">* {email.msg}</span>
             )}
           </div>
           <div className="signUpFormGrp">
@@ -118,7 +120,7 @@ const SignUp = () => {
               />
             </label>
             {password.hasError === true && (
-              <span className="errorMsg">{password.msg}</span>
+              <span className="errorMsg">* {password.msg}</span>
             )}
           </div>
           <button type="submit" className="signUpBtn">

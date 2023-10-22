@@ -27,3 +27,9 @@ td,
 textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
+
+.errorMsg {
+  font-size: 0.75rem;
+  color: #ff3333;
+  padding: 0px 5px;
+}

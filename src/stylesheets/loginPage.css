@@ -53,6 +53,10 @@
   margin-top: 15px;
 }
 
+.loginForm .errorMsg {
+  padding: 0px 20px;
+}
+
 .loginDemoBtn:hover {
   background-color: #00be00;
 }

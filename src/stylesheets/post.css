@@ -72,6 +72,10 @@
   gap: 10px;
 }
 
+.commentFormContainer {
+  flex-direction: column;
+}
+
 .commentForm {
   width: 100%;
   position: relative;

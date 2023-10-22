@@ -83,14 +83,16 @@ const BioModal = () => {
             />
           </label>
           {error.hasError === true && (
-            <span className="errorMsg">{error.msg}</span>
+            <span className="errorMsg">* {error.msg}</span>
           )}
         </div>
         <div className="bioModalFormGrp">
           <button
             type="button"
             className="closeBioModalBtn"
-            onClick={closeBioModal}
+            onClick={() => {
+              setError({ hasError: false, msg: "" }), closeBioModal();
+            }}
           >
             Cancel
           </button>

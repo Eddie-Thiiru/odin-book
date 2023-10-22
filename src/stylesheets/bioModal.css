@@ -16,13 +16,14 @@
 
 .bioModalFormGrp {
   display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
 .bioModalFormGrp button {
   flex: 1;
   height: 40px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .addBioBtn {

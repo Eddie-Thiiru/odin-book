@@ -8,13 +8,12 @@ import addFriendImg from "../images/person-add.svg";
 import personImg from "../images/person.svg";
 import "../stylesheets/friendsPage.css";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
 const Suggestions = () => {
   const [loading, setLoading] = useState(true);
   const [suggestions, setSuggestions] = useState();
-
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Fetch user details on component mount
   useEffect(() => {
@@ -128,8 +127,9 @@ const Suggestions = () => {
 const Requests = () => {
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState();
-
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Fetch user details on component mount
   useEffect(() => {
@@ -271,6 +271,8 @@ const Requests = () => {
 const FriendsPage = () => {
   const { name } = useParams();
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleNavigation = (path) => {
     navigate(`/${path}`);

@@ -40,6 +40,7 @@ const CommentSection = ({
               className="commentInput"
               name="text"
               placeholder="Write a comment"
+              required
             />
           </label>
           <button type="submit" className="submitCommentBtn">
@@ -47,7 +48,7 @@ const CommentSection = ({
           </button>
         </form>
         {commentError.hasError === true && (
-          <span className="errorMsg">{commentError.msg}</span>
+          <span className="errorMsg">* {commentError.msg}</span>
         )}
       </div>
       <div className="commentsContainer">

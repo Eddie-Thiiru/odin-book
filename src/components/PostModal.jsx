@@ -122,7 +122,12 @@ const PostModal = () => {
     <Modal id="postModal" style={styles} isOpen={postModalOpen}>
       <header className="postModalHeader">
         <h3>Create post</h3>
-        <button className="closePostModalBtn" onClick={closeNewPostModal}>
+        <button
+          className="closePostModalBtn"
+          onClick={() => {
+            setPhoto({ error: false, msg: "", src: "" }), closeNewPostModal();
+          }}
+        >
           <RxCross2 />
         </button>
       </header>
@@ -140,7 +145,7 @@ const PostModal = () => {
             />
           </label>
           {textError.hasError === true && (
-            <span className="errorMsg">{textError.msg}</span>
+            <span className="errorMsg"> * {textError.msg}</span>
           )}
         </div>
         <div className="postModalFormGrp">
@@ -160,7 +165,7 @@ const PostModal = () => {
             />
           </label>
           {photo.error === true && (
-            <span className="fileErrorMsg">{photo.msg}</span>
+            <span className="errorMsg">* {photo.msg}</span>
           )}
         </div>
         <div className="postModalFormGrp">

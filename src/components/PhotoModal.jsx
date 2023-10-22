@@ -21,7 +21,6 @@ const styles = {
 Modal.setAppElement("#root");
 
 const PhotoModal = () => {
-  const [error, setError] = useState({ hasError: false, msg: "" });
   const [photo, setPhoto] = useState({
     error: false,
     msg: "",
@@ -66,14 +65,7 @@ const PhotoModal = () => {
         reload();
       })
       .catch((err) => {
-        err
-          .json()
-          .then((data) => {
-            setError({ ...error, hasError: true, msg: data.errors });
-          })
-          .catch((genericError) => {
-            console.log(genericError.statusText);
-          });
+        console.log(err.statusText);
       });
   };
 
@@ -120,7 +112,12 @@ const PhotoModal = () => {
     <Modal id="photoModal" style={styles} isOpen={photoModalOpen}>
       <header className="photoModalHeader">
         <h3>Choose profile picture</h3>
-        <button className="closePhotoModalBtn" onClick={closePhotoModal}>
+        <button
+          className="closePhotoModalBtn"
+          onClick={() => {
+            setPhoto({ error: false, msg: "", src: "" }), closePhotoModal();
+          }}
+        >
           <RxCross2 />
         </button>
       </header>
@@ -144,11 +141,8 @@ const PhotoModal = () => {
               hidden
             />
           </label>
-          {error.hasError === true && (
-            <span className="errorMsg">{error.msg}</span>
-          )}
           {photo.error === true && (
-            <span className="fileErrorMsg">{photo.msg}</span>
+            <span className="errorMsg">* {photo.msg}</span>
           )}
         </div>
         <div className="photoModalFormGrp">
