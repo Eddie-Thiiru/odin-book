@@ -19,7 +19,7 @@ const Login = () => {
       object[key] = value;
     });
 
-    fetch("http://localhost:3000/login", {
+    fetch("https://odin-book-api.fly.dev/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(object),
@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   const handleDemoLogin = () => {
-    fetch("http://localhost:3000/login/guest", {
+    fetch("https://odin-book-api.fly.dev/login/guest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     })

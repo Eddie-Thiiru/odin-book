@@ -18,7 +18,7 @@ const Suggestions = () => {
 
   // Fetch user details on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${user.id}/suggestions`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${user.id}/suggestions`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -38,14 +38,17 @@ const Suggestions = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [user.id]);
 
   // Send friend request
   const sendFriendRequest = (requestId) => {
-    fetch(`http://localhost:3000/profile/${user.id}/requests/${requestId}`, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-    })
+    fetch(
+      `https://odin-book-api.fly.dev/profile/${user.id}/requests/${requestId}`,
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           return Promise.reject(response);
@@ -135,7 +138,7 @@ const Requests = () => {
 
   // Fetch user details on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${user.id}/requests`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${user.id}/requests`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -155,14 +158,17 @@ const Requests = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [user.id]);
 
   // Accept friend requests
   const acceptFriendRequest = (requestId) => {
-    fetch(`http://localhost:3000/profile/${user.id}/friends/${requestId}`, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-    })
+    fetch(
+      `https://odin-book-api.fly.dev/profile/${user.id}/friends/${requestId}`,
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           return Promise.reject(response);
@@ -180,10 +186,13 @@ const Requests = () => {
 
   // Delete friend requests
   const removeFriendRequest = (requestId) => {
-    fetch(`http://localhost:3000/profile/${user.id}/requests/${requestId}`, {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-    })
+    fetch(
+      `https://odin-book-api.fly.dev/profile/${user.id}/requests/${requestId}`,
+      {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           return Promise.reject(response);

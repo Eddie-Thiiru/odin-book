@@ -39,7 +39,7 @@ const ProfileHomePosts = ({ id }) => {
 
   // Fetch user posts on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${id}/posts`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${id}/posts`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -100,7 +100,7 @@ const ProfileHomeFriends = ({ id }) => {
 
   // Fetch user friends on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${id}/friends`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${id}/friends`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -200,7 +200,7 @@ const Profile = () => {
 
   // Fetch user details on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${id}`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

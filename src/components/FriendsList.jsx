@@ -12,7 +12,7 @@ const FriendsList = ({ id }) => {
 
   // Fetch user friends on component mount
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${id}/friends`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${id}/friends`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -36,7 +36,7 @@ const FriendsList = ({ id }) => {
 
   // unfriend users
   const removeFriend = (friendId) => {
-    fetch(`http://localhost:3000/profile/${id}/friends/${friendId}`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${id}/friends/${friendId}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
     })

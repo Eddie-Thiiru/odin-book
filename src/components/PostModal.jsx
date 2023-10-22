@@ -50,7 +50,7 @@ const PostModal = () => {
     formData.append("userId", user.id);
     formData.append("file", fileInput.current.files[0]);
 
-    fetch("http://localhost:3000/post", {
+    fetch("https://odin-book-api.fly.dev/post", {
       method: "POST",
       body: formData,
     })

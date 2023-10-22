@@ -36,7 +36,7 @@ const BioModal = () => {
       obj[key] = value;
     });
 
-    fetch(`http://localhost:3000/profile/${user.id}/bio`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${user.id}/bio`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(obj),

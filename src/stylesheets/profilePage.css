@@ -32,6 +32,8 @@
 }
 
 .profilePhotoWrapper {
+  height: 150px;
+  width: 150px;
   position: relative;
   border-radius: 50%;
   background-color: lightblue;
@@ -184,6 +186,7 @@
 .profileHeaderOne img {
   height: 150px;
   width: 150px;
+  border-radius: 50%;
 }
 
 .friend img {

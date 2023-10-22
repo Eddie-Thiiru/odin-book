@@ -51,7 +51,7 @@ const PhotoModal = () => {
 
     const user = JSON.parse(localStorage.getItem("user"));
 
-    fetch(`http://localhost:3000/profile/${user.id}/photo`, {
+    fetch(`https://odin-book-api.fly.dev/profile/${user.id}/photo`, {
       method: "POST",
       body: formData,
     })

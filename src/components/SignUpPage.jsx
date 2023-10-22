@@ -22,7 +22,7 @@ const SignUp = () => {
       obj[key] = value;
     });
 
-    fetch("http://localhost:3000/signup", {
+    fetch("https://odin-book-api.fly.dev/signup", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(obj),

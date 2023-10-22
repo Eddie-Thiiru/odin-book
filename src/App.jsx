@@ -31,7 +31,7 @@ const App = () => {
       return navigate("/login");
     }
 
-    fetch("http://localhost:3000/isUserAuth", {
+    fetch("https://odin-book-api.fly.dev/isUserAuth", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

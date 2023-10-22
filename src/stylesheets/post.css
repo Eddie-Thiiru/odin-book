@@ -164,11 +164,15 @@
   margin-left: auto;
 }
 
-.postHeader img,
+.postHeader img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
 .comment img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 
 .postImageContainer img {
@@ -203,4 +207,9 @@
 .likeBtn:hover,
 .commentBtn:hover {
   background-color: #3085f3;
+}
+
+.commentDeletePara:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

@@ -25,7 +25,7 @@ const PostDeleteModal = () => {
   };
 
   const handlePostDelete = () => {
-    fetch(`http://localhost:3000/post/${deleteModalOpen.postId}`, {
+    fetch(`https://odin-book-api.fly.dev/post/${deleteModalOpen.postId}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
     })

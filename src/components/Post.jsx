@@ -81,9 +81,12 @@ const CommentSection = ({
                       </p>
                     </div>
                     {obj.author._id === user.id && (
-                      <a href="#" onClick={handleCommentDelete}>
+                      <p
+                        className="commentDeletePara"
+                        onClick={() => handleCommentDelete(obj._id)}
+                      >
                         delete
-                      </a>
+                      </p>
                     )}
                   </div>
                   <div className="commentContent">
@@ -116,7 +119,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
   };
 
   const fetchCommentsData = () => {
-    fetch(`http://localhost:3000/post/${postId}/comments`, {
+    fetch(`https://odin-book-api.fly.dev/post/${postId}/comments`, {
       method: "GET",
       headers: { "Content-type": "application/json" },
     })
@@ -149,7 +152,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
 
     if (likes.includes(user.id)) {
       // Remove user like from database
-      fetch(`http://localhost:3000/post/${postId}/likes/${user.id}`, {
+      fetch(`https://odin-book-api.fly.dev/post/${postId}/likes/${user.id}`, {
         method: "DELETE",
         headers: { "Content-type": "application/json" },
       })
@@ -171,7 +174,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
         });
     } else {
       // Add user like to database
-      fetch(`http://localhost:3000/post/${postId}/likes`, {
+      fetch(`https://odin-book-api.fly.dev/post/${postId}/likes`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(obj),
@@ -197,12 +200,17 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
     }
   };
 
-  const handleCommentDelete = () => {
+  const handleCommentDelete = (commentId) => {
+    setLoading(true);
+
     // Remove user comment from database
-    fetch(`http://localhost:3000/post/${postId}/comments/${user.id}`, {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-    })
+    fetch(
+      `https://odin-book-api.fly.dev/post/${postId}/comments/${commentId}`,
+      {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           return Promise.reject(response);
@@ -211,6 +219,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
       })
       .then((data) => {
         setComments(data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.statusText);
@@ -220,6 +229,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
   // Handle new comment submit
   const handleCommentSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = new FormData(e.target);
     let obj = { userId: user.id };
@@ -229,7 +239,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
     });
 
     // Add submitted comment to database
-    fetch(`http://localhost:3000/post/${postId}/comments`, {
+    fetch(`https://odin-book-api.fly.dev/post/${postId}/comments`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(obj),
@@ -242,6 +252,7 @@ const PostFooter = ({ postLikes, postComments, postId }) => {
       })
       .then((data) => {
         setComments(data);
+        setLoading(false);
       })
       .catch((err) => {
         err

@@ -15,7 +15,7 @@ const Home = () => {
 
   // Fetch all posts on component mount
   useEffect(() => {
-    fetch("http://localhost:3000/post", {
+    fetch("https://odin-book-api.fly.dev/post", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
