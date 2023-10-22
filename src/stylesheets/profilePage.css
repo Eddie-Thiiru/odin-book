@@ -12,7 +12,7 @@
   grid-column: 2 / 3;
   width: 100%;
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: max-content 1fr;
 }
 
 .profileMain {
@@ -149,6 +149,16 @@
   margin: 10px;
 }
 
+.profileHomeFriends .spinner {
+  grid-column: 1 / -1;
+  height: 30px;
+  width: 30px;
+  border: 4px solid rgba(76, 76, 76, 0.15);
+  border-top: 4px solid #8ac8ff;
+  margin: 0px;
+  justify-self: center;
+}
+
 .profileNameWrapper h2 {
   margin-top: auto;
   padding: 5px 0px;
@@ -206,6 +216,10 @@
     max-width: 800px;
   }
 
+  .profileHomePosts > div:nth-child(1) {
+    padding: 10px 35px;
+  }
+
   .profileHomeFriends {
     width: 100%;
     max-height: 750px;
@@ -216,7 +230,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 170px));
-    grid-template-rows: 200px 200px 200px;
+    grid-auto-rows: 200px;
     gap: 10px;
   }
 }
@@ -230,12 +244,28 @@
   .profileHomeFriendsList {
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 140px));
-    grid-template-rows: 170px 170px 170px;
+    grid-auto-rows: 170px;
     gap: 10px;
   }
 }
 
 @media (max-width: 500px) {
+  .changePhotoBtn {
+    height: 30px;
+    width: 30px;
+  }
+
+  .profilePhotoWrapper {
+    height: 100px;
+    width: 100px;
+    margin-top: auto;
+  }
+
+  .profileHeaderOne img {
+    height: 100px;
+    width: 100px;
+  }
+
   .profileHomeFriends {
     max-height: 490px;
     max-width: 330px;
@@ -244,7 +274,7 @@
   .profileHomeFriendsList {
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 100px));
-    grid-template-rows: 130px 130px 130px;
+    grid-auto-rows: 130px;
     gap: 10px;
   }
 }

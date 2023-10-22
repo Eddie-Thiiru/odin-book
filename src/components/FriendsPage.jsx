@@ -4,6 +4,7 @@ import FriendsList from "./FriendsList";
 
 import groupImg from "../images/friends-group.svg";
 import allFriendsImg from "../images/all-friends.svg";
+import personCheckImg from "../images/person-check.svg";
 import addFriendImg from "../images/person-add.svg";
 import personImg from "../images/person.svg";
 import "../stylesheets/friendsPage.css";
@@ -80,6 +81,7 @@ const Suggestions = () => {
     <section className="suggestionsSection">
       <h2>People You May Know</h2>
       <div className="suggestionsContainer">
+        {loading === true && <div className="spinner"></div>}
         {loading === false && suggestions.length > 0
           ? suggestions.map((user, index) => {
               return (
@@ -217,6 +219,7 @@ const Requests = () => {
     <section className="requestsSection">
       <h2>Friend Requests</h2>
       <div className="requestsContainer">
+        {loading === true && <div className="spinner"></div>}
         {loading === false && requests.length > 0
           ? requests.map((user, index) => {
               return (
@@ -289,7 +292,7 @@ const FriendsPage = () => {
           className="sidebarGrp"
           onClick={() => handleNavigation("friends/requests")}
         >
-          <img src={addFriendImg} alt="" />
+          <img src={personCheckImg} alt="" />
           <p>Friend Requests</p>
         </div>
         <div

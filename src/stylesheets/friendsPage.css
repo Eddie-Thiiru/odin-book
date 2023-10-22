@@ -79,6 +79,16 @@
   background-color: #d9d9d9;
 }
 
+.friendsPage .spinner {
+  grid-column: 1 / -1;
+  height: 35px;
+  width: 35px;
+  border: 5px solid rgba(76, 76, 76, 0.15);
+  border-top: 5px solid #8ac8ff;
+  margin: 0px;
+  justify-self: center;
+}
+
 .userRequest a {
   padding: 10px;
 }
@@ -103,7 +113,6 @@
   object-fit: cover;
 }
 
-.friendsSidebar .sidebarGrp:nth-child(2) img,
 .friendsSidebar .sidebarGrp:nth-child(3) img {
   display: block;
   transform: scale(-1, 1);

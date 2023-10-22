@@ -53,7 +53,7 @@ const CommentSection = ({
       </div>
       <div className="commentsContainer">
         {loading === true ? (
-          <div>loading</div>
+          <div className="spinner"></div>
         ) : (
           comments.map((obj, index) => {
             return (

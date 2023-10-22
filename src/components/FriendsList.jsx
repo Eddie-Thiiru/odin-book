@@ -75,6 +75,7 @@ const FriendsList = ({ id }) => {
     <section className="friendsList">
       <h3>All friends</h3>
       <div className="friendsContainer">
+        {loading === true && <div className="spinner"></div>}
         {loading === false && friends.length > 0
           ? friends.map((friend, index) => {
               return (

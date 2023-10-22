@@ -77,6 +77,7 @@ const ProfileHomePosts = ({ id }) => {
         )}
       </div>
       <div className="postsContainer">
+        {loading === true && <div className="spinner"></div>}
         {loading === false && posts.length > 0
           ? posts.map((userPost, index) => {
               return <Post data={userPost} key={index} />;
@@ -152,6 +153,7 @@ const ProfileHomeFriends = ({ id }) => {
           <Link to={`/profile/${id}/friends`}>See all friends</Link>
         </header>
         <div className="profileHomeFriendsList">
+          {loading === true && <div className="spinner"></div>}
           {loading === false && friends.length > 0
             ? friends.map((friend, index) => {
                 return (

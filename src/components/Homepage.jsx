@@ -83,10 +83,13 @@ const Home = () => {
             </button>
           </div>
           <div className="postsContainer">
-            {loading === false &&
+            {loading === false ? (
               posts.map((obj, index) => {
                 return <Post data={obj} key={index} />;
-              })}
+              })
+            ) : (
+              <div className="spinner"></div>
+            )}
           </div>
         </div>
       </>

@@ -13,7 +13,7 @@
   z-index: 1;
   border-radius: 5px;
   padding: 10px 5px;
-  background-color: aquamarine;
+  background-color: white;
 }
 
 .navDropDown {
@@ -49,6 +49,27 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
+}
+
+.spinner {
+  height: 50px;
+  width: 50px;
+  border: 6px solid rgba(76, 76, 76, 0.15);
+  border-radius: 50%;
+  border-top: 6px solid #8ac8ff;
+  margin: 50px;
+  align-self: center;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 input {
@@ -121,6 +142,12 @@ a {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+}
+
+@media (max-width: 500px) {
+  h2 {
+    font-size: 1.25rem;
+  }
 }
 
 button:hover {

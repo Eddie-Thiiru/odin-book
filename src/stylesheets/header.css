@@ -54,6 +54,12 @@
   width: 35px;
 }
 
+@media (max-width: 500px) {
+  .siteBanner a {
+    font-size: 1.5rem;
+  }
+}
+
 .headerUserAccount > div:hover {
   background-color: #a4d4ff;
 }
