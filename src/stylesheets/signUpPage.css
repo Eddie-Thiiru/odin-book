@@ -62,3 +62,9 @@
 .signUpBtn:hover {
   background-color: #00be00;
 }
+
+@media (max-width: 500px) {
+  .signUpPage {
+    transform: scale(0.7);
+  }
+}

@@ -74,6 +74,10 @@
   .homeSidebar {
     display: none;
   }
+
+  .homepageHeader {
+    padding: 10px 40px;
+  }
 }
 
 .homeCreateBtn:hover {

@@ -34,18 +34,12 @@
 }
 
 .requestsContainer,
-.suggestionsContainer {
+.suggestionsContainer,
+.friendsContainer {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
   grid-auto-rows: 300px;
-  gap: 10px;
-}
-
-.friendsContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
-  grid-auto-rows: 250px;
   gap: 15px;
 }
 
@@ -167,12 +161,25 @@
   }
 
   .emptyRequestsIndicator {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: center;
   }
 
   .sidebarGrp p {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .requestsContainer,
+  .suggestionsContainer,
+  .friendsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 150px));
+    grid-auto-rows: 200px;
+    justify-content: center;
+    gap: 10px;
   }
 }
 

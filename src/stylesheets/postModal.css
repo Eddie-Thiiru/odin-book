@@ -79,3 +79,23 @@
 .fileInputLabel:hover {
   background-color: #cccccc;
 }
+
+@media (max-width: 500px) {
+  #postModal {
+    width: 300px;
+  }
+
+  .postModalHeader,
+  .postModalForm {
+    padding: 5px 0px;
+  }
+
+  .postModalFormGrp textarea {
+    height: 100px;
+  }
+
+  .postModalFormGrp img {
+    max-height: 150px;
+    object-fit: contain;
+  }
+}

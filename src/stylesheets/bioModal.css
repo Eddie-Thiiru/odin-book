@@ -38,3 +38,18 @@
 .addBioBtn:hover {
   background-color: #00be00;
 }
+
+@media (max-width: 500px) {
+  #bioModal {
+    width: 300px;
+  }
+
+  .bioModalHeader,
+  .bioModalForm {
+    padding: 5px 0px;
+  }
+
+  .bioModalFormGrp textarea {
+    height: 80px;
+  }
+}

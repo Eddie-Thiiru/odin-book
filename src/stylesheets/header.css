@@ -14,6 +14,7 @@
 
 .headerNavOne {
   display: flex;
+  gap: 10px;
 }
 
 .headerUserAccount {
@@ -55,8 +56,31 @@
 }
 
 @media (max-width: 500px) {
+  .appHeader {
+    padding: 10px 10px;
+  }
+
+  .headerUserAccount > div {
+    height: 35px;
+    width: 35px;
+  }
+
   .siteBanner a {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .headerNavOne a {
+    padding: 5px 10px;
+  }
+
+  .headerNavOne img {
+    height: 25px;
+    width: 25px;
+  }
+
+  .headerUserAccount img {
+    height: 30px;
+    width: 30px;
   }
 }
 

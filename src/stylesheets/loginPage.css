@@ -60,3 +60,9 @@
 .loginDemoBtn:hover {
   background-color: #00be00;
 }
+
+@media (max-width: 500px) {
+  .loginPage {
+    transform: scale(0.8);
+  }
+}

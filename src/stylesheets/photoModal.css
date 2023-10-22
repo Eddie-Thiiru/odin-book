@@ -66,3 +66,22 @@
 #photoModal .fileInputLabel:hover {
   background-color: #cccccc;
 }
+
+@media (max-width: 500px) {
+  #photoModal {
+    width: 300px;
+  }
+
+  .photoModalHeader,
+  .photoModalForm {
+    padding: 5px 0px;
+  }
+
+  .postModalFormGrp textarea {
+    height: 100px;
+  }
+
+  .photoModalFormGrp img {
+    max-height: 150px;
+  }
+}

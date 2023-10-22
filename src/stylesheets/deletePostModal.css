@@ -5,11 +5,6 @@
   gap: 15px;
 }
 
-.bioModalFormGrp {
-  display: flex;
-  gap: 20px;
-}
-
 #postDeleteModal > div {
   display: flex;
   gap: 15px;
@@ -27,4 +22,10 @@
 
 .confirmDeletePostBtn:hover {
   background-color: #ff1a1a;
+}
+
+@media (max-width: 500px) {
+  #postDeleteModal {
+    width: 300px;
+  }
 }

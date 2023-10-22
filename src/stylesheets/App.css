@@ -13,7 +13,7 @@
   z-index: 1;
   border-radius: 5px;
   padding: 10px 5px;
-  background-color: white;
+  background-color: #d9d9d9;
 }
 
 .navDropDown {
@@ -25,7 +25,7 @@
   height: 35px;
   width: 35px;
   border-radius: 50%;
-  background-color: #d9d9d9;
+  background-color: #8ac8ff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,6 +107,10 @@ button {
 h2 {
   font-size: 1.375rem;
   padding: 15px 0px;
+}
+
+h3 {
+  padding: 10px 0px;
 }
 
 p {
