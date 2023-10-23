@@ -25,7 +25,7 @@ const App = () => {
   });
 
   const navigate = useNavigate();
-  console.log("refreshed");
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       return navigate("/login");
