@@ -57,6 +57,7 @@
 .sidebarProfileContainer img {
   height: 40px;
   width: 40px;
+  object-fit: cover;
 }
 
 @media (max-width: 1080px) {

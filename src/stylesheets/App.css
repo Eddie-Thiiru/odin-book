@@ -137,9 +137,16 @@ a {
   pointer-events: none;
 }
 
+.navDropDown a:nth-child(1) img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
 .navDropDown img {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
 }
 
 .sidebarGrp img {
