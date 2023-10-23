@@ -49,50 +49,52 @@ const Home = () => {
 
   return (
     <div className="homepage">
-      <>
-        <div className="homeSidebar">
-          <div
-            className="sidebarGrp"
-            onClick={() => handleNavigation("profile")}
-          >
-            <div className="sidebarProfileContainer">
-              {profileImage === "" ? (
-                <img src={personImg} alt="" />
+      {user !== null && (
+        <>
+          <div className="homeSidebar">
+            <div
+              className="sidebarGrp"
+              onClick={() => handleNavigation("profile")}
+            >
+              <div className="sidebarProfileContainer">
+                {profileImage === "" ? (
+                  <img src={personImg} alt="" />
+                ) : (
+                  <img src={`data:image/png;base64,${profileImage}`} alt="" />
+                )}
+              </div>
+              <p>{`${user.firstName} ${user.lastName}`}</p>
+            </div>
+            <div
+              className="sidebarGrp"
+              onClick={() => handleNavigation("friends")}
+            >
+              <img src={groupColorImg} alt="" />
+              <p>Friends</p>
+            </div>
+          </div>
+          <div className="homepageMain">
+            <div className="homepageHeader">
+              <button
+                type="button"
+                className="homeCreateBtn"
+                onClick={openNewPostModal}
+              >
+                `What&apos;s on your mind?`
+              </button>
+            </div>
+            <div className="postsContainer">
+              {loading === false ? (
+                posts.map((obj, index) => {
+                  return <Post data={obj} key={index} />;
+                })
               ) : (
-                <img src={`data:image/png;base64,${profileImage}`} alt="" />
+                <div className="spinner"></div>
               )}
             </div>
-            <p>{`${user.firstName} ${user.lastName}`}</p>
           </div>
-          <div
-            className="sidebarGrp"
-            onClick={() => handleNavigation("friends")}
-          >
-            <img src={groupColorImg} alt="" />
-            <p>Friends</p>
-          </div>
-        </div>
-        <div className="homepageMain">
-          <div className="homepageHeader">
-            <button
-              type="button"
-              className="homeCreateBtn"
-              onClick={openNewPostModal}
-            >
-              `What&apos;s on your mind?`
-            </button>
-          </div>
-          <div className="postsContainer">
-            {loading === false ? (
-              posts.map((obj, index) => {
-                return <Post data={obj} key={index} />;
-              })
-            ) : (
-              <div className="spinner"></div>
-            )}
-          </div>
-        </div>
-      </>
+        </>
+      )}
     </div>
   );
 };
