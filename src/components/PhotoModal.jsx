@@ -61,7 +61,8 @@ const PhotoModal = () => {
         }
         return response.json();
       })
-      .then(() => {
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
         reload();
       })
       .catch((err) => {
