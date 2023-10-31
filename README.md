@@ -1,6 +1,10 @@
-# Odinbook
+# Odinbook(A Facebook clone)
 
 From The Odin Project's curriculum.
+
+[Live Demo](https://odin-app.netlify.app/login) :rocket:
+
+[Backend](https://github.com/Eddie-Thiiru/odin-book-backend) :point_left:
 
 # Built With
 
