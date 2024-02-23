@@ -18,6 +18,25 @@
   padding: 20px 5px;
 }
 
+.loginPage > div {
+  position: relative;
+}
+
+.loginWrapper.loadingActive {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.loginPage .spinner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  border-top: 6px solid #1877f2;
+}
+
 .loginForm {
   width: 400px;
   display: flex;
